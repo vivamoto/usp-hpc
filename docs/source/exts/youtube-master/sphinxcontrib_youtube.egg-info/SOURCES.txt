@@ -1,0 +1,13 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+sphinxcontrib/__init__.py
+sphinxcontrib/youtube.py
+sphinxcontrib_youtube.egg-info/PKG-INFO
+sphinxcontrib_youtube.egg-info/SOURCES.txt
+sphinxcontrib_youtube.egg-info/dependency_links.txt
+sphinxcontrib_youtube.egg-info/namespace_packages.txt
+sphinxcontrib_youtube.egg-info/not-zip-safe
+sphinxcontrib_youtube.egg-info/requires.txt
+sphinxcontrib_youtube.egg-info/top_level.txt
