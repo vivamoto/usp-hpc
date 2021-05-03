@@ -37,9 +37,3 @@ Welcome to USP HPC's documentation!
    about
    license 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

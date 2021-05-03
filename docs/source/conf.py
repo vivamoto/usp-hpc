@@ -50,22 +50,35 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
+
 if on_rtd:
     html_theme = 'default'
 else:
     html_theme = 'nature'
 
-html_theme = 'default' 
-html_theme = "sphinx_rtd_theme"
+#html_theme = 'default' 
+#html_theme = "sphinx_rtd_theme"
+html_theme = 'alabaster'
+html_theme = 'classic'
+html_theme = 'sphinxdoc'
+html_theme = 'scrolls'
+html_theme = 'agogo'
+html_theme = 'traditional'
+html_theme = 'nature'
+html_theme = 'haiku'
+html_theme = 'pyramid'
+html_theme = 'bizstyle'
+
+
+html_logo ='images/logo.png'
+html_favicon = 'images/favicon_1.ico'
 
 html_theme_options = {
 #    'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
     'analytics_anonymize_ip': False,
-    'logo_only': False,
-    'display_version': True,
+    'logo_only': True,
+    'display_version': False,
     'prev_next_buttons_location': 'bottom',
     'style_external_links': False,
     'vcs_pageview_mode': '',
@@ -82,3 +95,6 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+
+
