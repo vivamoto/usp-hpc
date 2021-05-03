@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Code development &mdash; USP HPC 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tensorflow configuration" href="tensorflow_settings.html" />
+    <link rel="prev" title="Working with modules" href="custom_module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> USP HPC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Development</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#test-and-debug">Test and debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#google-colab-setup">Google Colab setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Job schedule</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SLURM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Getting Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">USP HPC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Code development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/debug_config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-development">
+<h1>Code development<a class="headerlink" href="#code-development" title="Permalink to this headline">¶</a></h1>
+<p>The job scheduled in HPC goes to the last position in a queue that may take several days to start execution. For this reason, HPC is not suited for testing and debugging. This sections shows how to create a test environment and schedule a job.</p>
+<div class="section" id="test-and-debug">
+<h2>Test and debug<a class="headerlink" href="#test-and-debug" title="Permalink to this headline">¶</a></h2>
+<p>The GPU is disabled in the login node of <strong>lince</strong>, and this node is used mainly for job schedule. A feasible alternative is to test and debug in Google Colab or Kaggle before submitting to SLURM.</p>
+<p>An easy way to distinguish between debug and production modes is the use of and environment variable, for example <code class="docutils literal notranslate"><span class="pre">DEBUG_MODE</span></code>. In debug mode, the code loads a subset of the dataset and runs for a few epochs, since the goal is just make sure the code is error free. Then, in production mode the code processes the entire dataset and full epochs. In production mode you may also want to test several model architectures. The examples in this section show how to test an autoencoder with different number of layers.</p>
+<p>Insert this piece of code in the first cell of Google Colab. The second line enables debug mode, and the third and fourth lines are the model configuration.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;DEBUG_MODE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AE_ARCH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1_2_4_6_8_10_12&#39;</span>    <span class="c1"># Number of filters in each layer</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AE_KERNEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;5_5_3_3_3_3_3&#39;</span>    <span class="c1"># Filter size in each layer</span>
+</pre></div>
+</div>
+<p>You may want to test in VS Code before sending the script to SLURM. This can be done by setting the debug mode as default when you login, and just disable in the schedule script.</p>
+<p>Enable debug mode in <strong>lince</strong> inserting this code in your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">DEBUG_MODE</span><span class="o">=</span><span class="n">TRUE</span>          <span class="c1">#</span>
+<span class="n">export</span> <span class="n">AE_ARCH</span><span class="o">=</span><span class="mi">1_2_4_6_8_10_12</span>  <span class="c1"># Number of filters in each autoencoder layer</span>
+<span class="n">export</span> <span class="n">AE_KERNEL</span><span class="o">=</span><span class="mi">5_5_3_3_3_3_3</span>  <span class="c1"># Filter size in each layer</span>
+</pre></div>
+</div>
+<p>Read the debug mode in the Python script body:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Debug mode is lightweight components to be able to run in Google Colab</span>
+<span class="n">debug_mode</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DEBUG_MODE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Set 5 epochs in debug mode and 5000 otherwise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">debug_mode</span> <span class="ow">or</span> <span class="mi">5000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="google-colab-setup">
+<h2>Google Colab setup<a class="headerlink" href="#google-colab-setup" title="Permalink to this headline">¶</a></h2>
+<p>In the first cell of Colab, insert this code to mount GDrive in Colab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mount Google Drive</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;/content/drive&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you have access to the scripts in <strong>lince</strong> saved in Drive. Example of code to copy scripts from GDrive to Colab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;cp /content/drive/MyDrive/&lt;FOLDER&gt;/*.py .&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copy trained models from folder <code class="docutils literal notranslate"><span class="pre">model/&lt;MODEL_NAME&gt;</span></code> to Drive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">glob</span>
+
+<span class="k">def</span> <span class="nf">save_models_GDrive</span><span class="p">():</span>
+  <span class="c1"># Create folder to save models</span>
+  <span class="k">for</span> <span class="n">fdir</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;model/*&#39;</span><span class="p">):</span>
+        <span class="n">gdir</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/lince-colab/&#39;</span> <span class="o">+</span> <span class="n">fdir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">gdir</span><span class="p">):</span>
+          <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;mkdir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gdir</span><span class="p">))</span>
+
+  <span class="c1"># Copy trained models do Google Drive</span>
+  <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;model/*/*&#39;</span><span class="p">):</span>
+        <span class="n">fdir</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;cp model/</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1"> /content/drive/MyDrive/lince-colab/</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fdir</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">fdir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Job schedule<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Make sure your script saves trained models, plots and result tables and prints progress status during run time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -v
+#SBATCH --partition=GPUSP4
+#SBATCH --ntasks=2              # Maximum number of tasks / mpi processes
+#SBATCH --cpus-per-task=8       # Number OpenMP Threads per process
+#SBATCH --job-name=tr-ae        # Job name
+#SBATCH --time=3-08:00:00       # Set a limit on the total run time of the job allocation.
+#SBATCH --gres=gpu:tesla:2      # Uses 2 GPUs
+# Get email notification when job finishes or fails
+#SBATCH --mail-type=ALL         # Valid type values are NONE, BEGIN, END, FAIL, REQUEUE, ALL
+#SBATCH --mail-user=user@usp.com #  User to receive email notification of state changes
+
+
+#OpenMP settings:
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OMP_PLACES=threads
+export OMP_PROC_BIND=spread
+
+# TensorFlow Runtime optimizations for CPU
+# Ref: https://software.intel.com/content/www/us/en/develop/articles/guide-to-tensorflow-runtime-optimizations-for-cpu.html
+#export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}  # Number of physical cores
+#export KMP_AFFINITY=granularity=fine,compact,1,0
+#export KMP_BLOCKTIME=0         # (or 1)
+#export KMP_SETTINGS=TRUE
+#export TF_XLA_FLAGS=--tf_xla_enable_xla_devices
+
+echo $SLURM_JOB_ID              # ID of job allocation
+echo $SLURM_SUBMIT_DIR          # Directory job where was submitted
+echo $SLURM_JOB_NODELIST        # File containing allocated hostnames
+echo $SLURM_NTASKS              # Total number of cores for job
+
+# Load custom module with Miniconda environment variables
+module use --append /scratch/11568881/modulefiles/
+module load Miniconda/1.0
+
+# Autoencoder settings
+export DEBUG_MODE=FALSE                     # Production mode runs entire dataset and all epochs.
+export PROJECT=/scratch/11568881/project/
+export LOG=/scratch/11568881/project/log/
+
+# Save system info
+bash $PROJECT/system_info.sh &gt;&gt; $LOG/system_info_$SLURM_JOB_NODELIST\.log
+
+# Run the application
+export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
+export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
+echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
+srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+
+export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
+export AE_KERNEL=5_5_3_3_3_3    # Filter size
+echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
+srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+
+export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
+export AE_KERNEL=5_5_3_3_3      # Filter size
+echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
+srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+</pre></div>
+</div>
+<p>See more examples in <a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">HPC-UiT documentation</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="tensorflow_settings.html" class="btn btn-neutral float-right" title="Tensorflow configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="custom_module.html" class="btn btn-neutral float-left" title="Working with modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Victor Ivamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Server configuration &mdash; USP HPC 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Install Google Drive" href="install_gdrive.html" />
+    <link rel="prev" title="Client configuration" href="client_configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> USP HPC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Server configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-miniconda-and-python-libraries">Install Miniconda and Python libraries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-cuda-release">Check CUDA release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-miniconda">Install Miniconda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-libraries-installation">Test libraries installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-information">System information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SLURM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Getting Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">USP HPC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Server configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/server_config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="server-configuration">
+<h1>Server configuration<a class="headerlink" href="#server-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-miniconda-and-python-libraries">
+<h2>Install Miniconda and Python libraries<a class="headerlink" href="#install-miniconda-and-python-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Python libraries installed in HPC are outdated and you may want to use newer releases. This section shows how to install Miniconda in the user’s home directory, without affecting the original installation.</p>
+<p>Miniconda installs the most recent release of Python and <code class="docutils literal notranslate"><span class="pre">pip</span></code> in the user’s folder. The libraries installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code> and `` conda`` are also installed in your folder.</p>
+<p>All commands shall be executed in the server’s Linux terminal.</p>
+<div class="section" id="check-cuda-release">
+<h3>Check CUDA release<a class="headerlink" href="#check-cuda-release" title="Permalink to this headline">¶</a></h3>
+<p>Before installing the libraries, you need the current CUDA release to choose the right package. Run this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Wed_Apr_24_19:10:27_PDT_2019
+Cuda compilation tools, release 10.1, V10.1.168
+</pre></div>
+</div>
+<p>The output shows the current release is 10.1.</p>
+</div>
+<div class="section" id="install-miniconda">
+<h3>Install Miniconda<a class="headerlink" href="#install-miniconda" title="Permalink to this headline">¶</a></h3>
+<p>Miniconda is a package management system for Python and provides <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">conda</span></code> and the most recent Python release with basic libraries. Miniconda requires less disk space than Anaconda and is faster to install. After installing Miniconda, you may install just the libraries that you’ll use. Anaconda installs many packages and applications that won’t be used.</p>
+<p>Select a Miniconda release with the Python version compatible with the libraries that you need, since not all libraries are compatible with the newest release of Python. For example, the latest release of OpenCV doesn’t work with the latest release of Python.</p>
+<p>Access Miniconda <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#linux-installers">website</a> and copy the link with the installation script that you need. This example uses release 3.8.</p>
+<img alt="_images/miniconda1.png" src="_images/miniconda1.png" />
+<p>Use the <code class="docutils literal notranslate"><span class="pre">wget</span></code> command to download the script with the link you copied from Miniconda site:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+$ bash Miniconda3-latest-Linux-x86_64.sh
+# Update environment variables
+$ source ~/.bashrc
+</pre></div>
+</div>
+<p>Install Python libraries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge jupyterlab notebook pandas matplotlib seaborn scikit-learn IPython cvxopt opencv
+
+$ pip3 install hpelm opfython
+$ pip install python-hostlist
+</pre></div>
+</div>
+<p>Check if scikit-learn version is the most recent. The Miniconda release I downloaded has version 0.23, and since I need 0.24 I had to manually update:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Update scikit-learn
+$ conda upgrade -c conda-forge scikit-learn
+</pre></div>
+</div>
+<p>Install Tensorflow and PyTorch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Install Tensorflow and PyTorch
+# 1. Version without GPU to install in lince (CUDA 10.1 - Python 3.9)
+$ conda install -c anaconda tensorflow
+$ conda install -c pytorch -c=conda-forge pytorch torchvision torchaudio cudatoolkit=10.1
+
+# 2. Version with GPU to install in aguia
+$ conda install -c conda-forge tensorflow
+$ conda install -c pytorch -c=conda-forge pytorch torchvision torchaudio cpuonly
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-libraries-installation">
+<h2>Test libraries installation<a class="headerlink" href="#test-libraries-installation" title="Permalink to this headline">¶</a></h2>
+<p>After installing the libraries, run Python and import the libraries to confirm the correct version.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat system_info.py
+#!/scratch/&lt;YOUR_NUSP&gt;/miniconda3/bin/python3
+import sys
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import seaborn as sns
+import sklearn as sk
+import tensorflow as tf
+import torch
+import h5py
+import os
+
+print(&#39;=&#39;*20, &#39;Software version&#39;, &#39;=&#39;*20)
+print(&quot;Python:&quot;, sys.version.split(&#39;\n&#39;)[0])
+print(&quot;NumPy:&quot;, np.__version__)
+print(&quot;Pandas:&quot;, pd.__version__)
+print(&#39;Matplotlib:&#39;, mpl.__version__)
+print(&#39;Seaborn:&#39;, sns.__version__)
+print(&quot;Sklearn:&quot;, sk.__version__)
+print(&quot;Tensorflow:&quot;, tf.__version__)
+print(&quot;Pytorch:&quot;, torch.__version__)
+print(&quot;h5py:&quot;, h5py.__version__)
+</pre></div>
+</div>
+<p>Script output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python system_info.py
+==================== Software version ====================
+Python: 3.8.8 | packaged by conda-forge | (default, Feb 20 2021, 16:22:27)
+NumPy: 1.19.5
+Pandas: 1.0.1
+Matplotlib: 3.4.1
+Seaborn: 0.11.1
+Sklearn: 0.24.1
+Tensorflow: 2.4.0
+Pytorch: 1.4.0
+h5py: 2.10.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="system-information">
+<h2>System information<a class="headerlink" href="#system-information" title="Permalink to this headline">¶</a></h2>
+<p>You may need the hardware information to choose the right software release. The following commands show the main hardware devices and the Linux release. The commands may be executed directly in the Linux terminal, or you may save in a script and run in SLURM job. Note that PyTorch provides a custom version for each CUDA version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat system_info.sh
+#!/usr/bin/bash
+echo ========================
+echo SLURM: ID of job allocation
+echo ========================
+echo $SLURM_JOB_ID              # ID of job allocation
+
+echo ========================
+echo SLURM: Directory job where was submitted
+echo ========================
+echo $SLURM_SUBMIT_DIR          # Directory job where was submitted
+
+echo ========================
+echo SLURM: File containing allocated hostnames
+echo ========================
+echo $SLURM_JOB_NODELIST        # File containing allocated hostnames
+
+echo ========================
+echo SLURM: Total number of cores for job
+echo ========================
+echo $SLURM_NTASKS              # Total number of cores for job
+
+echo ========================
+echo SLURM: GPU devide ID that assigned to the job to use
+echo ========================
+echo $CUDA_VISIBLE_DEVICES
+
+echo ========================
+echo Hostname
+echo ========================
+hostname
+
+echo ========================
+echo Memory Info \(GB\):
+echo ========================
+free -g
+
+echo ========================
+echo CPU Info:
+echo ========================
+lscpu
+
+echo ========================
+echo Disk space
+echo ========================
+df -h
+
+echo ========================
+echo GPU 1
+echo ========================
+nvidia-smi
+
+echo ========================
+echo GPU 2
+echo ========================
+lshw -C display
+
+echo ========================
+echo CUDA Version
+echo ========================
+nvcc --version
+
+echo ========================
+echo Linux version
+echo ========================
+cat /etc/os-release
+
+echo ========================
+echo PATH
+echo ========================
+echo $PATH
+
+echo ========================
+echo Python
+echo ========================
+which python
+which python3
+
+echo ========================
+echo Conda
+echo ========================
+which conda
+conda --version
+
+echo ========================
+echo Pip
+echo ========================
+which pip
+pip --version
+
+echo ========================
+echo Python Library Versions
+echo ========================
+python system_info.py
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="install_gdrive.html" class="btn btn-neutral float-right" title="Install Google Drive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="client_configuration.html" class="btn btn-neutral float-left" title="Client configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Victor Ivamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

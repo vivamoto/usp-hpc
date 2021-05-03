@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>GPU Health Check &mdash; USP HPC 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Slurm" href="slurm.html" />
+    <link rel="prev" title="Tensorflow configuration" href="tensorflow_settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> USP HPC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Health Check</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#check-all-servers">Check all servers</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">SLURM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Getting Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">USP HPC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>GPU Health Check</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/gpucheck.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gpu-health-check">
+<h1>GPU Health Check<a class="headerlink" href="#gpu-health-check" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>lince</strong> servers have 2 NVIDIA Tesla GPUs installed. This cluster should be used to run GPU jobs; if you don’t need GPU then use <strong>aguia</strong> instead.</p>
+<p>You may check the GPU usage with the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> command in any server except the login server which is used only for job scheduling.</p>
+<p>Example of GPU using 67MiB of memory and process ID 29150:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-002:~]$ nvidia-smi
+Sun May  2 16:54:50 2021
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K20m          Off  | 00000000:05:00.0 Off |                    0 |
+| N/A   68C    P0   106W / 225W |     78MiB /  4743MiB |     74%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  Tesla K20m          Off  | 00000000:83:00.0 Off |                    0 |
+| N/A   30C    P8    16W / 225W |      0MiB /  4743MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0     29150      C   ...gramas/intel/gromacs-5.1.4-cuda/bin/gmx    67MiB |
++-----------------------------------------------------------------------------+
+(base) [11568881@lince2-002:~]$
+</pre></div>
+</div>
+<p>Message “No running processes found” on idle GPUs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-001:~]$ nvidia-smi
+Sun May  2 16:55:18 2021
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K20m          Off  | 00000000:05:00.0 Off |                    0 |
+| N/A   36C    P8    25W / 225W |     11MiB /  4743MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  Tesla K20m          Off  | 00000000:83:00.0 Off |                    0 |
+| N/A   28C    P8    16W / 225W |      0MiB /  4743MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+(base) [11568881@lince2-001:~]$
+</pre></div>
+</div>
+<p>Example of error message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-008:~]$ nvidia-smi
+Unable to determine the device handle for GPU 0000:05:00.0: GPU is lost.  Reboot the system to recover this GPU
+
+
+(base) [11568881@lince2-008:~]$
+</pre></div>
+</div>
+<div class="section" id="check-all-servers">
+<h2>Check all servers<a class="headerlink" href="#check-all-servers" title="Permalink to this headline">¶</a></h2>
+<p>This Python script connects to each server and checks the GPU status. Then, it prints a list of servers with idle GPU and GPUs with error message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat gpustat.py
+#!/scratch/11568881/miniconda3/bin/python
+
+import os
+
+# Connect to each server and collect GPU information.
+# Result is saved in a log file.
+def gpustatus():
+        if os.path.exists(&#39;gpustat.log&#39;):
+                os.system(&#39;rm gpustat.log&#39;)
+        for n in range(1, 32):
+                s = (&quot;000&quot; + str(n))[-3:]
+                os.system(&#39;ssh lince2-{} \&quot;hostname;nvidia-smi\&quot; &gt;&gt; gpustat.log&#39;.format(s))
+
+# Opens the log file and check the GPU usage and availability.
+# Print the list of servers with idle GPU and GPU down.
+def procfile():
+        nogpu = []
+        gpudown = []
+        with open(&#39;gpustat.log&#39;, &#39;r&#39;) as f:
+                rows = f.readlines()
+                for row in rows:
+                        if &#39;lince2-&#39; in row:
+                                server = row.split(&#39;\n&#39;)[0]
+                        elif &quot;No running processes found&quot; in row:
+                                nogpu.append(server)
+                        elif &quot;Unable to determine the device handle for GPU&quot; in row:
+                                gpudown.append(server)
+
+        # Print results
+        print(&quot;=&quot;*5, &quot;No running processes found&quot;, &quot;=&quot;*10)
+        for item in nogpu:
+                print(item)
+        print(&quot;=&quot;*5,&quot;Unable to determine the device handle&quot;, &quot;=&quot;*10)
+        for item in gpudown:
+                print(item)
+
+# Execute GPU checks
+gpustatus()
+procfile()
+</pre></div>
+</div>
+<p>Script output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python gpustat.py
+===== No running processes found ==========
+lince2-001.hpc.usp.br
+lince2-009.hpc.usp.br
+lince2-011.hpc.usp.br
+lince2-021.hpc.usp.br
+lince2-022.hpc.usp.br
+===== Unable to determine the device handle ==========
+lince2-008.hpc.usp.br
+lince2-011.hpc.usp.br
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="slurm.html" class="btn btn-neutral float-right" title="Slurm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tensorflow_settings.html" class="btn btn-neutral float-left" title="Tensorflow configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Victor Ivamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

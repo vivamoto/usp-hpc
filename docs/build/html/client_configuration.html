@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Client configuration &mdash; USP HPC 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Server configuration" href="server_config.html" />
+    <link rel="prev" title="Welcome to USP HPC’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> USP HPC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Client configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#putty-configuration">PuTTY Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ssh-configuration">SSH Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-the-conection">Test the conection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-remote-code">Running remote code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-openssh">Install OpenSSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">SSH configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vs-code-configuration">VS Code configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-the-connection">Test the connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-transfer-with-sftp">File transfer with SFTP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Code Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SLURM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Other Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Getting Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">USP HPC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Client configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/client_configuration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="client-configuration">
+<h1>Client configuration<a class="headerlink" href="#client-configuration" title="Permalink to this headline">¶</a></h1>
+<p>This section shows how to configure a development environment in your computer and how to connect to the servers. The instructions are for Microsoft Windows 10 and minor changes may be required for other operating systems.</p>
+<p>Cluster access is done using command line interface (CLI) via SSH. PuTTY is a free terminal for remote access. This section shows how to setup PuTTY to connect and create a tunnel for file transfer and remote code execution.</p>
+<div class="section" id="putty-configuration">
+<h2>PuTTY Configuration<a class="headerlink" href="#putty-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Download PuTTY from the developer’s <a class="reference external" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">website</a> and install in your computer. After installation, open PuTTY:</p>
+<img alt="_images/putty1.png" id="putty1" src="_images/putty1.png" />
+<p>In the <strong>Connection-&gt;Data</strong> menu, insert your user name (USP number). This avoids PuTTY asking for this on each login.</p>
+<img alt="_images/putty2.png" id="putty2" src="_images/putty2.png" />
+<p>PuTTY allows to connect directly in <strong>lince</strong> or <strong>aguia</strong> after connecting to <strong>shark</strong>. Just add the command <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">lince2</span></code> in the <strong>Remote command</strong> field.</p>
+<img alt="_images/putty3.png" id="putty3" src="_images/putty3.png" />
+<p>You may create a tunnel from your computer directly to <strong>aguia</strong> or <strong>lince</strong> for file transfer or to use Jupyter Notebook. Insert a local port and the port number of the server you will access. For instance, the image below assigns local port 2022 to port 22 in <strong>lince2</strong>. Port 22 is use for ssh connection and file transfer via sftp. So, to transfer files just use this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sftp -P 2022 user@localhost
+</pre></div>
+</div>
+<img alt="_images/putty4.png" id="putty4" src="_images/putty4.png" />
+<p>Port settings suggestion:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Server</p></th>
+<th class="head"><p>Local port</p></th>
+<th class="head"><p>Remote port</p></th>
+<th class="head"><p>Service</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lince2</p></td>
+<td><p>2022</p></td>
+<td><p>22</p></td>
+<td><p>SSH and SFTP</p></td>
+</tr>
+<tr class="row-odd"><td><p>lince2</p></td>
+<td><p>2888</p></td>
+<td><p>8888</p></td>
+<td><p>Jupyter Lab and Jupyter Notebook</p></td>
+</tr>
+<tr class="row-even"><td><p>aguia4</p></td>
+<td><p>4022</p></td>
+<td><p>22</p></td>
+<td><p>SSH and SFTP</p></td>
+</tr>
+<tr class="row-odd"><td><p>aguia4</p></td>
+<td><p>4088</p></td>
+<td><p>8888</p></td>
+<td><p>Jupyter Lab and Jupyter Notebook</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ssh-configuration">
+<h2>SSH Configuration<a class="headerlink" href="#ssh-configuration" title="Permalink to this headline">¶</a></h2>
+<p>SSH uses login and password for authentication, or a pair of public and private keys. The latter case you can connect directly to the server without entering the password.</p>
+<p>Create a pair of public and private keys in your computer to connect to <strong>aguia</strong> and <strong>lince</strong> while the tunnel is open. There’s no need to enter the passphrase, just the default values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">&gt;</span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span>
+<span class="n">Generating</span> <span class="n">public</span><span class="o">/</span><span class="n">private</span> <span class="n">rsa</span> <span class="n">key</span> <span class="n">pair</span><span class="o">.</span>
+<span class="n">Enter</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">to</span> <span class="n">save</span> <span class="n">the</span> <span class="n">key</span> <span class="p">(</span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="p">):</span>
+<span class="n">Enter</span> <span class="n">passphrase</span> <span class="p">(</span><span class="n">empty</span> <span class="k">for</span> <span class="n">no</span> <span class="n">passphrase</span><span class="p">):</span>
+<span class="n">Enter</span> <span class="n">same</span> <span class="n">passphrase</span> <span class="n">again</span><span class="p">:</span>
+<span class="n">Your</span> <span class="n">identification</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="ow">in</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span>
+<span class="n">Your</span> <span class="n">public</span> <span class="n">key</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="ow">in</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span><span class="o">.</span>
+<span class="n">The</span> <span class="n">key</span> <span class="n">fingerprint</span> <span class="ow">is</span><span class="p">:</span>
+<span class="n">SHA256</span><span class="p">:</span><span class="n">jRAhGYfJkD9Zj4ew97SCLImf98m5FiJdhlnKwbK06Jg</span> <span class="n">vivam</span><span class="nd">@DESKTOP</span><span class="o">-</span><span class="n">TAO705M</span>
+<span class="n">The</span> <span class="n">key</span><span class="s1">&#39;s randomart image is:</span>
+<span class="o">+---</span><span class="p">[</span><span class="n">RSA</span> <span class="mi">2048</span><span class="p">]</span><span class="o">----+</span>
+<span class="o">|</span>  <span class="o">+=</span><span class="n">o</span><span class="o">=+*</span>         <span class="o">|</span>
+<span class="o">|</span>  <span class="o">+</span> <span class="o">*</span><span class="n">oo</span><span class="o">.</span>         <span class="o">|</span>
+<span class="o">|</span> <span class="n">o</span> <span class="o">*</span> <span class="o">@.+</span>         <span class="o">|</span>
+<span class="o">|.</span> <span class="n">O</span> <span class="o">.</span> <span class="o">*.+</span><span class="n">o</span>       <span class="o">|</span>
+<span class="o">|</span><span class="n">oo</span> <span class="o">+</span> <span class="o">*</span> <span class="o">+</span><span class="n">S</span><span class="o">..</span>      <span class="o">|</span>
+<span class="o">|</span><span class="n">E</span><span class="o">.+</span> <span class="o">=</span> <span class="n">o</span> <span class="n">o</span>        <span class="o">|</span>
+<span class="o">|</span> <span class="o">.</span> <span class="o">+</span> <span class="o">.</span> <span class="n">o</span>         <span class="o">|</span>
+<span class="o">|</span>  <span class="o">+</span> <span class="o">.+.</span><span class="n">o</span>         <span class="o">|</span>
+<span class="o">|</span>   <span class="o">.</span> <span class="o">.*.</span>         <span class="o">|</span>
+<span class="o">+----</span><span class="p">[</span><span class="n">SHA256</span><span class="p">]</span><span class="o">-----+</span>
+
+<span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The key pair is saved in folder <code class="docutils literal notranslate"><span class="pre">.ssh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">&gt;</span><span class="nb">dir</span> <span class="o">.</span><span class="n">ssh</span>
+<span class="n">O</span> <span class="n">volume</span> <span class="n">na</span> <span class="n">unidade</span> <span class="n">C</span> <span class="n">é</span> <span class="n">OS</span>
+<span class="n">O</span> <span class="n">Número</span> <span class="n">de</span> <span class="n">Série</span> <span class="n">do</span> <span class="n">Volume</span> <span class="n">é</span> <span class="mi">963</span><span class="n">B</span><span class="o">-</span><span class="n">B7F6</span>
+
+<span class="n">Pasta</span> <span class="n">de</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span>\<span class="o">.</span><span class="n">ssh</span>
+
+<span class="mi">03</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2021</span>  <span class="mi">23</span><span class="p">:</span><span class="mi">06</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="o">.</span>
+<span class="mi">03</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2021</span>  <span class="mi">23</span><span class="p">:</span><span class="mi">06</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="o">..</span>
+<span class="mi">03</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2021</span>  <span class="mi">23</span><span class="p">:</span><span class="mi">06</span>             <span class="mi">1</span><span class="p">,</span><span class="mi">679</span> <span class="n">id_rsa</span>
+<span class="mi">03</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2021</span>  <span class="mi">23</span><span class="p">:</span><span class="mi">06</span>               <span class="mi">404</span> <span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>
+                           <span class="mi">2</span> <span class="n">arquivo</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>          <span class="mi">2</span><span class="p">,</span><span class="mi">083</span> <span class="nb">bytes</span>
+                           <span class="mi">2</span> <span class="n">pasta</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>    <span class="mi">8</span><span class="p">,</span><span class="mi">864</span><span class="p">,</span><span class="mi">555</span><span class="p">,</span><span class="mi">008</span> <span class="nb">bytes</span> <span class="n">disponíveis</span>
+
+<span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The next step is to append the public key content to the file <code class="docutils literal notranslate"><span class="pre">~/.ssh/authorized_keys</span></code> in <strong>aguia</strong> and <strong>lince</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span>\<span class="o">.</span><span class="n">ssh</span><span class="o">&gt;</span><span class="n">cat</span> <span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>
+<span class="n">ssh</span><span class="o">-</span><span class="n">rsa</span> <span class="n">AAAAB3NzaC1yc2EAAAADAQABAAABAQDKdaBWyChrn7wsR6</span><span class="o">+</span><span class="n">SolgFV8cPxR3hBdPTjGJgI5prPH25vK6XqSvXq8</span><span class="o">+</span><span class="n">mDvdXlBI2w9MQKLNw</span><span class="o">/</span><span class="n">ELu1n2vTFzJIcmAPY1qk8DsynQYU4CzD5</span><span class="o">+</span><span class="n">VVh</span><span class="o">+</span><span class="n">sMmVrzLUTTZ</span><span class="o">+</span><span class="mi">3</span><span class="n">rC3gWWoMSWqn3IwFNiUsHgQhn6HqIzWhaUVyMF62e3YClfSEnc5t5bkaupAgwP4vNWCfdbNjV</span><span class="o">/</span><span class="n">qbUyQoflsd5I</span><span class="o">/</span><span class="mi">9</span><span class="n">BgMLj1Tcz</span><span class="o">+</span><span class="n">b</span><span class="o">/</span><span class="n">SXT866aI5JPmIu9yKZH2b1u</span><span class="o">/</span><span class="n">ZMtFEtydG9UlCxk</span><span class="o">+</span><span class="n">Deptlxryi2fIe9wFQuBq1CwZkh0Ikt93SOceksuK6ReW</span><span class="o">+</span><span class="n">pJwcocu2MzznCZMAgTiNVvGQAhQxFY7</span> <span class="n">vivam</span><span class="nd">@DESKTOP</span><span class="o">-</span><span class="n">TAO705M</span>
+
+<span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span>\<span class="o">.</span><span class="n">ssh</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-the-conection">
+<h2>Test the conection<a class="headerlink" href="#test-the-conection" title="Permalink to this headline">¶</a></h2>
+<p>Open a terminal window and test the connection with SFTP:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span><span class="o">&gt;</span><span class="n">sftp</span> <span class="o">-</span><span class="n">P</span> <span class="mi">2022</span> <span class="mi">11568881</span><span class="nd">@localhost</span>
+<span class="n">Connected</span> <span class="n">to</span> <span class="mi">11568881</span><span class="nd">@localhost</span><span class="o">.</span>
+<span class="n">sftp</span><span class="o">&gt;</span> <span class="n">pwd</span>
+<span class="n">Remote</span> <span class="n">working</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">scratch</span><span class="o">/</span><span class="mi">11568881</span>
+<span class="n">sftp</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-remote-code">
+<h2>Running remote code<a class="headerlink" href="#running-remote-code" title="Permalink to this headline">¶</a></h2>
+<p>Editing and debugging code in a Linux terminal is not as efficient as in an IDE or in Jupyter. The <strong>PyCharm Professional</strong> edition allows remote execution via SSH and won’t be discussed here because it’s a paid version. Microsoft <strong>Visual Studio Code</strong> (VS Code) extension <strong>Remote - SSH</strong> also do the job. VS Code requires <strong>OpenSSH</strong>, so we’ll install this first.</p>
+</div>
+<div class="section" id="install-openssh">
+<h2>Install OpenSSH<a class="headerlink" href="#install-openssh" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Remote - SSH</strong> extension uses OpenSSH; the PuTTY version is not supported.</p>
+<p>In Windows 10 settings, open the windows <strong>Applications and Resources</strong>, then click in <strong>Optional Resources</strong> and check wether <strong>OpenSSH Client</strong> is installed. If it isn’t, click in <strong>+ Add resource</strong> to install.</p>
+<p>Open <strong>Settings</strong>, then go to <strong>Apps</strong> and click <strong>Apps &amp; features</strong>. Under “Apps &amp; features,” click the <strong>Manage optional features</strong> link.</p>
+<img alt="_images/openssh1.jpg" id="openssh1" src="_images/openssh1.jpg" />
+<p>Click the <strong>Add a feature</strong> button, select the <strong>OpenSSH Client</strong> option and click <strong>Install</strong>.</p>
+<img alt="_images/openssh2.jpg" id="openssh2" src="_images/openssh2.jpg" />
+</div>
+<div class="section" id="id1">
+<h2>SSH configuration<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Create the <code class="docutils literal notranslate"><span class="pre">ssh_config</span></code> file in your Windows user’s <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> folder with this content:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">vivam</span>\<span class="o">.</span><span class="n">ssh</span><span class="o">&gt;</span><span class="n">cat</span> <span class="n">config</span>
+<span class="c1"># Read more about SSH config files: https://linux.die.net/man/5/ssh_config</span>
+<span class="n">Host</span> <span class="n">lince2</span>
+        <span class="n">HostName</span> <span class="n">localhost</span>
+        <span class="n">User</span> <span class="o">&lt;</span><span class="n">YOUR</span> <span class="n">NUSP</span><span class="o">&gt;</span>
+        <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+        <span class="n">Port</span> <span class="mi">2022</span>
+<span class="n">Host</span> <span class="n">aguia4</span>
+        <span class="n">HostName</span> <span class="n">localhost</span>
+        <span class="n">User</span> <span class="o">&lt;</span><span class="n">YOUR</span> <span class="n">NUSP</span><span class="o">&gt;</span>
+        <span class="n">IdentityFile</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+        <span class="n">Port</span> <span class="mi">4022</span>
+</pre></div>
+</div>
+<p><strong>User</strong> is your USP number (NUSP) used to login into the servers and <strong>Port</strong> is the SSH tunnel port.</p>
+</div>
+<div class="section" id="vs-code-configuration">
+<h2>VS Code configuration<a class="headerlink" href="#vs-code-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Install VS Code and the following extensions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit">Remote - SSH (Microsoft)</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit">Remote - SSH: Editing Configuration Files (Microsoft)</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter">Jupyter (Microsoft)</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python (Microsoft)</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.python-extension-pack">Python Extension Pack (Don Jayamanne)</a></p></li>
+</ul>
+<p>With the <strong>Jupyter</strong> extension you can edit and execute notebooks in interactive mode, which is handy to make small tests and debugging.</p>
+<p>The <strong>Python Extension Pack</strong> allows you to run small chunks of code like in Jupyter. It also shows charts and images in a side bar window. Just insert <code class="docutils literal notranslate"><span class="pre">#%%</span></code> in a new line to convert the code below in a Jupyter cell, as shown in the image below.</p>
+<img alt="_images/vscode1.png" id="vscode1" src="_images/vscode1.png" />
+</div>
+<div class="section" id="test-the-connection">
+<h2>Test the connection<a class="headerlink" href="#test-the-connection" title="Permalink to this headline">¶</a></h2>
+<p>See details at <a class="reference external" href="https://code.visualstudio.com/docs/remote/ssh-tutorial">https://code.visualstudio.com/docs/remote/ssh-tutorial</a></p>
+</div>
+<div class="section" id="file-transfer-with-sftp">
+<h2>File transfer with SFTP<a class="headerlink" href="#file-transfer-with-sftp" title="Permalink to this headline">¶</a></h2>
+<p>SFTP usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span><span class="n">sftp</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">sftp</span> <span class="p">[</span><span class="o">-</span><span class="mi">46</span><span class="n">aCfpqrv</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">B</span> <span class="n">buffer_size</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">batchfile</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">cipher</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">D</span> <span class="n">sftp_server_path</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">F</span> <span class="n">ssh_config</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">identity_file</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">limit</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">ssh_option</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">P</span> <span class="n">port</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">R</span> <span class="n">num_requests</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">program</span><span class="p">]</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">subsystem</span> <span class="o">|</span> <span class="n">sftp_server</span><span class="p">]</span> <span class="n">destination</span>
+</pre></div>
+</div>
+<p>SFTP commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sftp&gt; help
+Available commands:
+bye                                Quit sftp
+cd path                            Change remote directory to &#39;path&#39;
+chgrp grp path                     Change group of file &#39;path&#39; to &#39;grp&#39;
+chmod mode path                    Change permissions of file &#39;path&#39; to &#39;mode&#39;
+chown own path                     Change owner of file &#39;path&#39; to &#39;own&#39;
+df [-hi] [path]                    Display statistics for current directory or
+                                                                   filesystem containing &#39;path&#39;
+exit                               Quit sftp
+get [-afPpRr] remote [local]       Download file
+reget [-fPpRr] remote [local]      Resume download file
+reput [-fPpRr] [local] remote      Resume upload file
+help                               Display this help text
+lcd path                           Change local directory to &#39;path&#39;
+lls [ls-options [path]]            Display local directory listing
+lmkdir path                        Create local directory
+ln [-s] oldpath newpath            Link remote file (-s for symlink)
+lpwd                               Print local working directory
+ls [-1afhlnrSt] [path]             Display remote directory listing
+lumask umask                       Set local umask to &#39;umask&#39;
+mkdir path                         Create remote directory
+progress                           Toggle display of progress meter
+put [-afPpRr] local [remote]       Upload file
+pwd                                Display remote working directory
+quit                               Quit sftp
+rename oldpath newpath             Rename remote file
+rm path                            Delete remote file
+rmdir path                         Remove remote directory
+symlink oldpath newpath            Symlink remote file
+version                            Show SFTP version
+!command                           Execute &#39;command&#39; in local shell
+!                                  Escape to local shell
+?                                  Synonym for help
+sftp&gt;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="server_config.html" class="btn btn-neutral float-right" title="Server configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to USP HPC’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Victor Ivamoto.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

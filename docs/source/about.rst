@@ -1,0 +1,15 @@
+About
+=====
+
+This is the unofficial guide to use HPC clusters at USP. I created this guide while configuring the environment to train a machine learning model during my master's degree research. It's not intended to be neither complete nor accurate, but to provide helpful insights to new users. For detailed information on each topic, I suggest searching the Internet.
+
+
+
+LinkedIn: https://www.linkedin.com/in/victor-ivamoto/
+
+GitHub: https://github.com/vivamoto/
+
+RPubs: https://rpubs.com/vsi
+
+Tableau: https://public.tableau.com/profile/victor.s.ivamoto#!/
+

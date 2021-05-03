@@ -1,0 +1,13 @@
+name: docs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - sphinx==3.5.4
+  - nbsphinx==0.8.4
+  - python=3.8
+  - rasterio==1.2
+  - pip>=20.1
+  - pip:
+    - sphinx_rtd_theme==0.5.2
+
