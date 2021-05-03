@@ -10,4 +10,5 @@ dependencies:
   - pip>=20.1
   - pip:
     - sphinx_rtd_theme==0.5.2
-
+#    - sphinxcontrib.youtube
+    - sphinxcontrib.yt
