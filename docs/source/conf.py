@@ -33,7 +33,7 @@ release = '0.0.1'
 sys.path.append(os.path.abspath('exts'))
 
 extensions = [ "sphinx_rtd_theme",
-               "sphinxcontrib.youtube",
+               "youtube",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
