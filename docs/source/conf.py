@@ -58,7 +58,6 @@ else:
     html_theme = 'nature'
 
 #html_theme = 'default' 
-#html_theme = "sphinx_rtd_theme"
 html_theme = 'alabaster'
 html_theme = 'classic'
 html_theme = 'sphinxdoc'
@@ -69,7 +68,7 @@ html_theme = 'nature'
 html_theme = 'haiku'
 html_theme = 'pyramid'
 html_theme = 'bizstyle'
-
+html_theme = 'sphinx_rtd_theme'
 
 html_logo ='images/logo.png'
 html_favicon = 'images/favicon_1.ico'
