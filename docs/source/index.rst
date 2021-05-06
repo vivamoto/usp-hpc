@@ -6,7 +6,7 @@
 Welcome to USP HPC's documentation!
 ===================================
 
-High-Performance Computing (HPC) at USP comprises two clusters of servers with the following attributes:
+High-Performance Computing (HPC) at Universidade de Sao Paulo (USP) comprises two clusters of servers with the following attributes:
 
 * Workload manager (Slurm) that schedules jobs in all servers.
 * Shared network file system visible to all servers.
@@ -25,7 +25,8 @@ This documentation explains how to:
 
 This is a quick start guide for new users and may save several hours of searching and testing. Detailed and complete information on each topic is available in the Internet.
 
-Experienced Linux and Python users may find relevant information in this guide. I recommend that you read all sections even if you're familiar with the title.
+.. image:: images/hpc.PNG
+
 
 .. toctree::
    :maxdepth: 2
@@ -34,7 +35,6 @@ Experienced Linux and Python users may find relevant information in this guide. 
    client_configuration 
    server_configuration
    install_gdrive
-   custom_module
 
 .. toctree::
    :maxdepth: 2
@@ -49,7 +49,8 @@ Experienced Linux and Python users may find relevant information in this guide. 
    :caption: SLURM
 
    slurm
-    
+   custom_module
+
 .. toctree::
    :caption: Other Information
 

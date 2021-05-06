@@ -71,7 +71,7 @@ html_theme = 'bizstyle'
 html_theme = 'sphinx_rtd_theme'
 
 html_logo ='images/logo.png'
-html_favicon = 'images/favicon_1.ico'
+html_favicon = 'images/favicon_2.ico'
 
 html_theme_options = {
 #    'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
