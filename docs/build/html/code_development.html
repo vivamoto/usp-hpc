@@ -40,9 +40,7 @@
     
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tensorflow configuration" href="tensorflow_settings.html" />
-    <link rel="prev" title="Working with modules" href="custom_module.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,18 +88,12 @@
               <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_configuration.html">Server configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Code development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#test-and-debug">Test and debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#google-colab-setup">Google Colab setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Job schedule</a></li>
-</ul>
-</li>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
 </ul>
@@ -168,7 +160,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/debug_config.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/code_development.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -245,71 +237,6 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Job schedule<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>Make sure your script saves trained models, plots and result tables and prints progress status during run time:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -v
-#SBATCH --partition=GPUSP4
-#SBATCH --ntasks=2              # Maximum number of tasks / mpi processes
-#SBATCH --cpus-per-task=8       # Number OpenMP Threads per process
-#SBATCH --job-name=tr-ae        # Job name
-#SBATCH --time=3-08:00:00       # Set a limit on the total run time of the job allocation.
-#SBATCH --gres=gpu:tesla:2      # Uses 2 GPUs
-# Get email notification when job finishes or fails
-#SBATCH --mail-type=ALL         # Valid type values are NONE, BEGIN, END, FAIL, REQUEUE, ALL
-#SBATCH --mail-user=user@usp.com #  User to receive email notification of state changes
-
-
-#OpenMP settings:
-export OMP_NUM_THREADS=1
-export MKL_NUM_THREADS=1
-export OMP_PLACES=threads
-export OMP_PROC_BIND=spread
-
-# TensorFlow Runtime optimizations for CPU
-# Ref: https://software.intel.com/content/www/us/en/develop/articles/guide-to-tensorflow-runtime-optimizations-for-cpu.html
-#export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}  # Number of physical cores
-#export KMP_AFFINITY=granularity=fine,compact,1,0
-#export KMP_BLOCKTIME=0         # (or 1)
-#export KMP_SETTINGS=TRUE
-#export TF_XLA_FLAGS=--tf_xla_enable_xla_devices
-
-echo $SLURM_JOB_ID              # ID of job allocation
-echo $SLURM_SUBMIT_DIR          # Directory job where was submitted
-echo $SLURM_JOB_NODELIST        # File containing allocated hostnames
-echo $SLURM_NTASKS              # Total number of cores for job
-
-# Load custom module with Miniconda environment variables
-module use --append /scratch/11568881/modulefiles/
-module load Miniconda/1.0
-
-# Autoencoder settings
-export DEBUG_MODE=FALSE                     # Production mode runs entire dataset and all epochs.
-export PROJECT=/scratch/11568881/project/
-export LOG=/scratch/11568881/project/log/
-
-# Save system info
-bash $PROJECT/system_info.sh &gt;&gt; $LOG/system_info_$SLURM_JOB_NODELIST\.log
-
-# Run the application
-export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3_3    # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3      # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-</pre></div>
-</div>
-<p>See more examples in <a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">HPC-UiT documentation</a>.</p>
-</div>
 </div>
 
 
@@ -317,10 +244,6 @@ srun python3 $PROJECT/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="tensorflow_settings.html" class="btn btn-neutral float-right" title="Tensorflow configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="custom_module.html" class="btn btn-neutral float-left" title="Working with modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

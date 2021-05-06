@@ -31,6 +31,9 @@ Miniconda is a package management system for Python and provides ``pip``, ``cond
 
 Select a Miniconda release with the Python version compatible with the libraries that you need, since not all libraries are compatible with the newest release of Python. For example, the latest release of Tensorflow doesn't work with the latest release of Python and CUDA 10.1.
 
+.. warning::
+	Check Python, CUDA and libraries compatibility before installing Miniconda. Many libraries only work with specific Python and CUDA versions.
+	
 Access Miniconda `website <https://docs.conda.io/en/latest/miniconda.html#linux-installers>`_ and copy the link with the installation script that you need. This example uses release 3.8.
 
 .. image:: images/miniconda1.png
@@ -46,10 +49,13 @@ The installation script asks a few questions, just press ENTER to accept the def
 	by running conda init? [yes|no]
 	[no] >>> yes
 
-Now you need to reload ``~/.bashrc`` to update the environment variables and activate the base environment::
+Now reload ``~/.bashrc`` to update the environment variables and activate the base environment::
 
 	$ source ~/.bashrc
 
+.. warning::
+	Make sure to select the right environment before installation and always check Python and libraries after installation.
+	
 Install Python libraries for your project. Tensorflow and PyTorch use custom installation which depends on Python and CUDA versions::
 
 	$ conda install -c conda-forge numpy pandas matplotlib scikit-learn 
@@ -59,10 +65,15 @@ Optionally update the libaries for the most recent version. In this example, Min
 	# Update scikit-learn
 	$ conda upgrade -c conda-forge scikit-learn
 
+Install Tensorflow
+^^^^^^^^^^^^^^^^^^
 
 From `Tensorflow website <https://www.tensorflow.org/install/source#linux>`_, select the correct version according to Python and CUDA versions. Since we have Python 3.8 and CUDA 10.1, the best Tensorflow version is 2.3::
 
 	$ pip install tensorflow==2.3
+
+Install PyTorch
+^^^^^^^^^^^^^^^
 
 Similarly, check `PyTorch website <https://pytorch.org/>`_ to install the correct version::
 
@@ -74,9 +85,15 @@ Similarly, check `PyTorch website <https://pytorch.org/>`_ to install the correc
 	# 2. Version without GPU to install in aguia
 	$ conda install pytorch torchvision torchaudio cpuonly -c pytorch
       
+Install Dask
+^^^^^^^^^^^^
+
 `Dask <https://dask.org/>`_ is a library for parallel and distributed computing. Dask's schedulers scale to thousand-node clusters and its algorithms have been tested on some of the largest supercomputers in the world. It easily integrates with NumPy, Pandas and scikit-learn::
 
 	$ conda install dask distributed
+
+Install RAPIDS
+^^^^^^^^^^^^^^
 
 The `RAPIDS <https://rapids.ai/index.html>`_ suite of open source software libraries and APIs gives you the ability to execute end-to-end data science and analytics pipelines entirely on GPUs. Use the `release selector <https://rapids.ai/start.html#get-rapids>`_ to get the right installation command::
 
@@ -102,7 +119,9 @@ After installing the libraries, run Python and import the libraries to confirm t
 	print('Matplotlib:', mpl.__version__)
 	print("Sklearn:", sk.__version__)
 
-
+.. warning::
+	Check Tensorflow, PyTorch and RAPIDS on the processing node, since the login server doesn't have access to GPU.
+	
 Lince login node doesn't provide GPU access, so you need to connect to a processing node to check Tensorflow, PyTorch and RAPIDS::
 
 	$ ssh lince2-001
@@ -113,6 +132,9 @@ Once connected in lince2-001, connect to a processing node and make sure that Te
 	Python 3.8.5 (default, Sep  4 2020, 07:30:14)
 	[GCC 7.3.0] :: Anaconda, Inc. on linux
 	Type "help", "copyright", "credits" or "license" for more information.
+
+Check Tensorflow installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Import Tensorflow::
 
@@ -144,6 +166,9 @@ Check if Tensorflow can list both GPUs::
 	2021-05-06 10:09:19.192994: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0, 1
 	[PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'), PhysicalDevice(name='/physical_device:XLA_CPU:0', device_type='XLA_CPU'), PhysicalDevice(name='/physical_device:XLA_GPU:0', device_type='XLA_GPU'), PhysicalDevice(name='/physical_device:XLA_GPU:1', device_type='XLA_GPU'), PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU'), PhysicalDevice(name='/physical_device:GPU:1', device_type='GPU')]
 
+Check PyTorch installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Import PyTorch::
 
 	>>> import torch
@@ -163,6 +188,9 @@ Check GPU name::
 	
 	>>> torch.cuda.get_device_name(torch.cuda.current_device())
 	'Tesla K20m'
+
+Check RAPIDS installation
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 RAPIDS automatically detects the GPU when you import a library::
 

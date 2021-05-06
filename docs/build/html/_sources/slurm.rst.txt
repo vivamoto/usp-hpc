@@ -36,6 +36,82 @@ Here's a list of some commonly used user commands. See Slurm `man pages <https:/
 
 Job schedule
 ------------
+Make sure your script saves trained models, plots and result tables and prints progress status during run time::
+
+
+	#!/bin/bash -v
+	#SBATCH --partition=GPUSP4
+	#SBATCH --ntasks=2              # number of tasks / mpi processes
+	#SBATCH --cpus-per-task=8       # Number OpenMP Threads per process
+	#SBATCH --job-name=tr-ae        # Job name: TReina AutoEncoder
+	#SBATCH --time=3-08:00:00       # Se voce nao especificar, o default é 8 horas. O limite é 80 horas.
+	#SBATCH --gres=gpu:tesla:2      # para solicitar uma GPU
+	# Get email notification when job finishes or fails
+	#SBATCH --mail-type=ALL         # notifications for job done & fail
+	#SBATCH --mail-user=vivamoto@yahoo.com.br
+
+	#OpenMP settings:
+	export OMP_NUM_THREADS=1
+	export MKL_NUM_THREADS=1
+	export OMP_PLACES=threads
+	export OMP_PROC_BIND=spread
+
+	# OpenMP settings for Tensorflow:
+	# we set OMP_NUM_THREADS to the number cpu cores per MPI task
+	#export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}  # Number of physical cores
+	#export KMP_AFFINITY=granularity=fine,compact,1,0
+	#export KMP_BLOCKTIME=0         # (or 1)
+	#export KMP_SETTINGS=TRUE
+	#export TF_XLA_FLAGS=--tf_xla_enable_xla_devices
+
+	echo $SLURM_JOB_ID              # ID of job allocation
+	echo $SLURM_SUBMIT_DIR          # Directory job where was submitted
+	echo $SLURM_JOB_NODELIST        # File containing allocated hostnames
+	echo $SLURM_NTASKS              # Total number of cores for job
+
+	#Carregar modulos necessarios ("module avail" listará o que está disponível para o compilador selecionado)
+	module use --append /scratch/11568881/modulefiles/
+	module load Miniconda/1.0
+	#module load Anaconda/3-2019.03 cuda/10.1
+
+	# Autoencoder settings
+	export DEBUG_MODE=FALSE
+	export PROJETO=/scratch/11568881/projeto/
+	export LOG=/scratch/11568881/projeto/log/
+	export PYTHON=/scratch/11568881/miniconda3/bin/
+
+	# System info
+	bash $PROJETO/system_info.sh >> $LOG/system_info_$SLURM_JOB_NODELIST\.log
+	srun bash $PROJETO/system_info.sh >> $LOG/system_info_srun_$SLURM_JOB_NODELIST\.log
+
+	#run the application:
+	export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
+	export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
+	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
+	srun $PYTHON/python3 $PROJETO/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+
+	export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
+	export AE_KERNEL=5_5_3_3_3_3    # Filter size
+	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
+	srun $PYTHON/python3 $PROJETO/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+
+	export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
+	export AE_KERNEL=5_5_3_3_3      # Filter size
+	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
+	srun $PYTHON/python3 $PROJETO/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+
+	export AE_ARCH=1_2_4_6          # Number of filters in each layer
+	export AE_KERNEL=5_5_3_3        # Filter size
+	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
+	srun $PYTHON/python3 $PROJETO/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+
+	export AE_ARCH=1_2_4            # Number of filters in each layer
+	export AE_KERNEL=5_5_3          # Filter size
+	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
+	srun $PYTHON/python3 $PROJETO/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+
+See more examples in `HPC-UiT documentation <https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html>`_.
+
 
 
 

@@ -89,13 +89,12 @@
               <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_configuration.html">Server configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
 </ul>
@@ -177,6 +176,23 @@
             
   <div class="section" id="welcome-to-usp-hpc-s-documentation">
 <h1>Welcome to USP HPC’s documentation!<a class="headerlink" href="#welcome-to-usp-hpc-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>High-Performance Computing (HPC) at USP comprises two clusters of servers with the following attributes:</p>
+<ul class="simple">
+<li><p>Workload manager (Slurm) that schedules jobs in all servers.</p></li>
+<li><p>Shared network file system visible to all servers.</p></li>
+<li><p>Limited local storage.</p></li>
+<li><p>Login node with no GPU in <strong>lince</strong> cluster.</p></li>
+</ul>
+<p>Cluster <strong>aguia</strong> contains servers for CPU processing while <strong>lince</strong> cluster is for GPU processing. Access to the clusters through <strong>shark</strong>.</p>
+<p>Both clusters allow parallel and distributed computing for scientific purposes, for example training of machine learning and deep learning models.</p>
+<p>This documentation explains how to:</p>
+<ol class="arabic simple">
+<li><p>Setup a development environment for testing and debugging.</p></li>
+<li><p>Schedule and manage Slurm jobs.</p></li>
+<li><p>Use Python libraries to train machine learning and deep learning models.</p></li>
+</ol>
+<p>This is a quick start guide for new users and may save several hours of searching and testing. Detailed and complete information on each topic is available in the Internet.</p>
+<p>Experienced Linux and Python users may find relevant information in this guide. I recommend that you read all sections even if you’re familiar with the title.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul>
@@ -192,10 +208,10 @@
 <li class="toctree-l2"><a class="reference internal" href="client_configuration.html#file-transfer-with-sftp">File transfer with SFTP</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="server_config.html">Server configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="server_config.html#install-miniconda-and-python-libraries">Install Miniconda and Python libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="server_config.html#test-installation">Test installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="server_config.html#system-information">System information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server_configuration.html">Server configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="server_configuration.html#install-miniconda-and-python-libraries">Install Miniconda and Python libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_configuration.html#test-installation">Test installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_configuration.html#system-information">System information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a><ul>
@@ -218,12 +234,6 @@
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Code Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="debug_config.html#test-and-debug">Test and debug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug_config.html#google-colab-setup">Google Colab setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debug_config.html#id1">Job schedule</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tensorflow_settings.html#tensorflow-installation">Tensorflow installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tensorflow_settings.html#save-the-model">Save the model</a></li>

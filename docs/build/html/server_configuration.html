@@ -94,9 +94,18 @@
 <li class="toctree-l2"><a class="reference internal" href="#install-miniconda-and-python-libraries">Install Miniconda and Python libraries</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#check-cuda-release">Check CUDA release</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#install-miniconda">Install Miniconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-tensorflow">Install Tensorflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-pytorch">Install PyTorch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-dask">Install Dask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-rapids">Install RAPIDS</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#test-installation">Test installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-installation">Test installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-tensorflow-installation">Check Tensorflow installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-pytorch-installation">Check PyTorch installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-rapids-installation">Check RAPIDS installation</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#system-information">System information</a></li>
 </ul>
 </li>
@@ -105,7 +114,6 @@
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="debug_config.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
 </ul>
@@ -172,7 +180,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/server_config.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/server_configuration.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -208,6 +216,10 @@ Cuda compilation tools, release 10.1, V10.1.168
 <h3>Install Miniconda<a class="headerlink" href="#install-miniconda" title="Permalink to this headline">¶</a></h3>
 <p>Miniconda is a package management system for Python and provides <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">conda</span></code> and the most recent Python release with basic libraries. Miniconda requires less disk space than Anaconda and is faster to install. After installing Miniconda, you may install just the libraries that you’ll use. Anaconda installs many packages and applications that won’t be used.</p>
 <p>Select a Miniconda release with the Python version compatible with the libraries that you need, since not all libraries are compatible with the newest release of Python. For example, the latest release of Tensorflow doesn’t work with the latest release of Python and CUDA 10.1.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Check Python, CUDA and libraries compatibility before installing Miniconda. Many libraries only work with specific Python and CUDA versions.</p>
+</div>
 <p>Access Miniconda <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#linux-installers">website</a> and copy the link with the installation script that you need. This example uses release 3.8.</p>
 <img alt="_images/miniconda1.png" src="_images/miniconda1.png" />
 <p>Use the <code class="docutils literal notranslate"><span class="pre">wget</span></code> command to download the script with the link you copied from Miniconda site:</p>
@@ -221,9 +233,13 @@ $ bash Miniconda3-latest-Linux-x86_64.sh
 by running conda init? [yes|no]
 [no] &gt;&gt;&gt; yes</p>
 </div></blockquote>
-<p>Now you need to reload <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> to update the environment variables and activate the base environment:</p>
+<p>Now reload <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> to update the environment variables and activate the base environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source ~/.bashrc
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure to select the right environment before installation and always check Python and libraries after installation.</p>
 </div>
 <p>Install Python libraries for your project. Tensorflow and PyTorch use custom installation which depends on Python and CUDA versions:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install -c conda-forge numpy pandas matplotlib scikit-learn
@@ -234,10 +250,16 @@ by running conda init? [yes|no]
 $ conda upgrade -c conda-forge scikit-learn
 </pre></div>
 </div>
+</div>
+<div class="section" id="install-tensorflow">
+<h3>Install Tensorflow<a class="headerlink" href="#install-tensorflow" title="Permalink to this headline">¶</a></h3>
 <p>From <a class="reference external" href="https://www.tensorflow.org/install/source#linux">Tensorflow website</a>, select the correct version according to Python and CUDA versions. Since we have Python 3.8 and CUDA 10.1, the best Tensorflow version is 2.3:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install tensorflow==2.3
 </pre></div>
 </div>
+</div>
+<div class="section" id="install-pytorch">
+<h3>Install PyTorch<a class="headerlink" href="#install-pytorch" title="Permalink to this headline">¶</a></h3>
 <p>Similarly, check <a class="reference external" href="https://pytorch.org/">PyTorch website</a> to install the correct version:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Install PyTorch
 # 1. Version with GPU to install in lince (CUDA 10.1 - Python 3.8)
@@ -248,10 +270,16 @@ $ conda install pytorch torchvision torchaudio cudatoolkit=10.1 -c pytorch
 $ conda install pytorch torchvision torchaudio cpuonly -c pytorch
 </pre></div>
 </div>
+</div>
+<div class="section" id="install-dask">
+<h3>Install Dask<a class="headerlink" href="#install-dask" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://dask.org/">Dask</a> is a library for parallel and distributed computing. Dask’s schedulers scale to thousand-node clusters and its algorithms have been tested on some of the largest supercomputers in the world. It easily integrates with NumPy, Pandas and scikit-learn:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install dask distributed
 </pre></div>
 </div>
+</div>
+<div class="section" id="install-rapids">
+<h3>Install RAPIDS<a class="headerlink" href="#install-rapids" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="https://rapids.ai/index.html">RAPIDS</a> suite of open source software libraries and APIs gives you the ability to execute end-to-end data science and analytics pipelines entirely on GPUs. Use the <a class="reference external" href="https://rapids.ai/start.html#get-rapids">release selector</a> to get the right installation command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ conda install -c rapidsai -c nvidia -c conda-forge rapids-blazing=0.19 python=3.8 cudatoolkit=10.1
 </pre></div>
@@ -277,6 +305,10 @@ print(&#39;Matplotlib:&#39;, mpl.__version__)
 print(&quot;Sklearn:&quot;, sk.__version__)
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Check Tensorflow, PyTorch and RAPIDS on the processing node, since the login server doesn’t have access to GPU.</p>
+</div>
 <p>Lince login node doesn’t provide GPU access, so you need to connect to a processing node to check Tensorflow, PyTorch and RAPIDS:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh lince2-001
 </pre></div>
@@ -288,6 +320,8 @@ Python 3.8.5 (default, Sep  4 2020, 07:30:14)
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 </pre></div>
 </div>
+<div class="section" id="check-tensorflow-installation">
+<h3>Check Tensorflow installation<a class="headerlink" href="#check-tensorflow-installation" title="Permalink to this headline">¶</a></h3>
 <p>Import Tensorflow:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="go">2021-05-06 10:09:05.807604: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1</span>
@@ -318,6 +352,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">[PhysicalDevice(name=&#39;/physical_device:CPU:0&#39;, device_type=&#39;CPU&#39;), PhysicalDevice(name=&#39;/physical_device:XLA_CPU:0&#39;, device_type=&#39;XLA_CPU&#39;), PhysicalDevice(name=&#39;/physical_device:XLA_GPU:0&#39;, device_type=&#39;XLA_GPU&#39;), PhysicalDevice(name=&#39;/physical_device:XLA_GPU:1&#39;, device_type=&#39;XLA_GPU&#39;), PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;), PhysicalDevice(name=&#39;/physical_device:GPU:1&#39;, device_type=&#39;GPU&#39;)]</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="check-pytorch-installation">
+<h3>Check PyTorch installation<a class="headerlink" href="#check-pytorch-installation" title="Permalink to this headline">¶</a></h3>
 <p>Import PyTorch:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
 </pre></div>
@@ -338,6 +375,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">&#39;Tesla K20m&#39;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="check-rapids-installation">
+<h3>Check RAPIDS installation<a class="headerlink" href="#check-rapids-installation" title="Permalink to this headline">¶</a></h3>
 <p>RAPIDS automatically detects the GPU when you import a library:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cudf</span>
 <span class="go">/scratch/11568881/miniconda3/lib/python3.8/site-packages/cudf/utils/gpu_utils.py:92: UserWarning: You will need a GPU with NVIDIA Pascal™ or newer architecture</span>
@@ -345,6 +385,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">Detected Compute Capability: 3.5</span>
 <span class="go">  warnings.warn(</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="system-information">
