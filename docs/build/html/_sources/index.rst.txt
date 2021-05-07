@@ -64,6 +64,7 @@ Cluster **lince**:
    debug_config
    tensorflow_settings
    gpucheck
+   linux
 
 .. toctree::
    :maxdepth: 2
