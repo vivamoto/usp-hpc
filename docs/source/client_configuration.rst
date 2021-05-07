@@ -175,6 +175,9 @@ The **Python Extension Pack** allows you to run small chunks of code like in Jup
 .. _vscode1:
 .. image:: images/vscode1.png
 
+Prevent data loss while editing code enabling **Auto Save**:
+
+.. image:: images/vscode2.png
 
 
 Test the connection

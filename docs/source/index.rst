@@ -25,7 +25,28 @@ This documentation explains how to:
 
 This is a quick start guide for new users and may save several hours of searching and testing. Detailed and complete information on each topic is available in the Internet.
 
+
+Cluster Architecture
+--------------------
+
 .. image:: images/hpc.PNG
+
+Cluster **aguia**:
+
+* 128 servers
+* 512GB RAM
+* 20 cores
+* Intel(R) Xeon(R) CPU E7- 2870 @ 2.40GHz
+* 256TB filesystem
+
+Cluster **lince**:
+
+* 32 servers
+* 128GB RAM
+* 16 cores
+* Intel(R) Xeon(R) E5- 2680 @ 2.70GHz
+* 2 GPUs NVIDIA Tesla K20m 
+* 55TB filesystem
 
 
 .. toctree::
