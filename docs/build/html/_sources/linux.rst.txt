@@ -11,7 +11,7 @@ The ``man`` command provides an online reference manual of any command. For exam
 Linux processes
 ^^^^^^^^^^^^^^^
 
-The ``top`` command shows CPU and memory usage, running processes and other information. It provides a dynamic view of the sytem usage, 
+The ``top`` command shows CPU and memory usage, running processes and other information. It provides a dynamic view of the sytem usage::
 
  	$ top
 	top - 14:32:01 up 546 days, 5 min,  6 users,  load average: 0.40, 0.33, 0.27
@@ -64,7 +64,7 @@ screen
 
 The ``screen`` command opens a virtual terminal that keeps running even when the main terminal is disconnected. Another real terminal can connect to it, which makes it useful when installing packages. 
 
-Steps to use ``screen``::
+Steps to use ``screen``:
 
 #. Open a virtual terminal with the ``screen`` command.
 #. Run any command or script in this terminal.
@@ -72,7 +72,7 @@ Steps to use ``screen``::
 #. Run ``screen -ls`` to list all virtual terminals.
 #. Reconnect with ``screen -r``.
 
-Common options::
+Common options:
 
 * ``<CTRL> + a c`` Create a new window (with shell)
 * ``<CTRL> + a “`` List all window

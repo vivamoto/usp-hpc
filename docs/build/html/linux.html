@@ -193,39 +193,32 @@
 </div>
 <div class="section" id="linux-processes">
 <h2>Linux processes<a class="headerlink" href="#linux-processes" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">top</span></code> command shows CPU and memory usage, running processes and other information. It provides a dynamic view of the sytem usage,</p>
-<blockquote>
-<div><p>$ top
+<p>The <code class="docutils literal notranslate"><span class="pre">top</span></code> command shows CPU and memory usage, running processes and other information. It provides a dynamic view of the sytem usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ top
 top - 14:32:01 up 546 days, 5 min,  6 users,  load average: 0.40, 0.33, 0.27
 Tasks: 351 total,   1 running, 331 sleeping,  17 stopped,   2 zombie
 %Cpu(s):  0.2 us,  0.2 sy,  0.0 ni, 97.0 id,  2.6 wa,  0.0 hi,  0.1 si,  0.0 st
 KiB Mem : 13182566+total,  2305124 free, 78298656 used, 51221880 buff/cache
-KiB Swap:        0 total,        0 free,        0 used. 49155016 avail Mem</p>
-<blockquote>
-<div><blockquote>
-<div><p>PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND</p>
-</div></blockquote>
-<p>6763 ganglia   20   0  406312 131972   1376 S   2.7  0.1  17495:02 gmond
-6695 ganglia   20   0  632268  15936    396 S   1.8  0.0  21331:43 gmetad</p>
-</div></blockquote>
-<p>30101 11568881  20   0  162268   2568   1612 R   1.4  0.0   0:00.07 top
-11222 mysql     20   0   54.8g  49.1g   4480 S   0.9 39.0   1790:49 mysqld</p>
-<blockquote>
-<div><blockquote>
-<div><p>1 root      20   0  193924   6028   1728 S   0.0  0.0 295:43.67 systemd
-2 root      20   0       0      0      0 S   0.0  0.0   0:13.83 kthreadd
-3 root      20   0       0      0      0 S   0.0  0.0 402:24.01 ksoftirqd/0
-8 root      rt   0       0      0      0 S   0.0  0.0   0:25.18 migration/0
-9 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh</p>
-</div></blockquote>
-<p>10 root      20   0       0      0      0 S   0.0  0.0 544:55.47 rcu_sched
-11 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 lru-add-drain
-12 root      rt   0       0      0      0 S   0.0  0.0   3:27.55 watchdog/0
-13 root      rt   0       0      0      0 S   0.0  0.0   3:18.02 watchdog/1
-14 root      rt   0       0      0      0 S   0.0  0.0   1:22.39 migration/1
-15 root      20   0       0      0      0 S   0.0  0.0 370:18.79 ksoftirqd/1</p>
-</div></blockquote>
-</div></blockquote>
+KiB Swap:        0 total,        0 free,        0 used. 49155016 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 6763 ganglia   20   0  406312 131972   1376 S   2.7  0.1  17495:02 gmond
+ 6695 ganglia   20   0  632268  15936    396 S   1.8  0.0  21331:43 gmetad
+30101 11568881  20   0  162268   2568   1612 R   1.4  0.0   0:00.07 top
+11222 mysql     20   0   54.8g  49.1g   4480 S   0.9 39.0   1790:49 mysqld
+        1 root      20   0  193924   6028   1728 S   0.0  0.0 295:43.67 systemd
+        2 root      20   0       0      0      0 S   0.0  0.0   0:13.83 kthreadd
+        3 root      20   0       0      0      0 S   0.0  0.0 402:24.01 ksoftirqd/0
+        8 root      rt   0       0      0      0 S   0.0  0.0   0:25.18 migration/0
+        9 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh
+   10 root      20   0       0      0      0 S   0.0  0.0 544:55.47 rcu_sched
+   11 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 lru-add-drain
+   12 root      rt   0       0      0      0 S   0.0  0.0   3:27.55 watchdog/0
+   13 root      rt   0       0      0      0 S   0.0  0.0   3:18.02 watchdog/1
+   14 root      rt   0       0      0      0 S   0.0  0.0   1:22.39 migration/1
+   15 root      20   0       0      0      0 S   0.0  0.0 370:18.79 ksoftirqd/1
+</pre></div>
+</div>
 </div>
 <div class="section" id="running-in-background">
 <h2>Running in background<a class="headerlink" href="#running-in-background" title="Permalink to this headline">¶</a></h2>
@@ -251,26 +244,26 @@ $ bg
 <h2>screen<a class="headerlink" href="#screen" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">screen</span></code> command opens a virtual terminal that keeps running even when the main terminal is disconnected. Another real terminal can connect to it, which makes it useful when installing packages.</p>
 <p>Steps to use <code class="docutils literal notranslate"><span class="pre">screen</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#. Open a virtual terminal with the ``screen`` command.</span>
-<span class="c1">#. Run any command or script in this terminal.</span>
-<span class="c1">#. While the command is running, disconnect the terminal with ``&lt;CTRL&gt; + a`` and ``&lt;CTRL&gt; + d``.</span>
-<span class="c1">#. Run ``screen -ls`` to list all virtual terminals.</span>
-<span class="c1">#. Reconnect with ``screen -r``.</span>
-</pre></div>
-</div>
+<ol class="arabic simple">
+<li><p>Open a virtual terminal with the <code class="docutils literal notranslate"><span class="pre">screen</span></code> command.</p></li>
+<li><p>Run any command or script in this terminal.</p></li>
+<li><p>While the command is running, disconnect the terminal with <code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">d</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-ls</span></code> to list all virtual terminals.</p></li>
+<li><p>Reconnect with <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-r</span></code>.</p></li>
+</ol>
 <p>Common options:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>* ``&lt;CTRL&gt; + a c`` Create a new window (with shell)
-* ``&lt;CTRL&gt; + a “`` List all window
-* ``&lt;CTRL&gt; + a 0`` Switch to window 0 (by number)
-* ``&lt;CTRL&gt; + a A`` Rename the current window
-* ``&lt;CTRL&gt; + a S`` Split current region horizontally into two regions
-* ``&lt;CTRL&gt; + a |`` Split current region vertically into two regions
-* ``&lt;CTRL&gt; + a tab`` Switch the input focus to the next region
-* ``&lt;CTRL&gt; + a &lt;CTRL&gt; + a`` Toggle between the current and previous region
-* ``&lt;CTRL&gt; + a Q``  Close all regions but the current one
-* ``&lt;CTRL&gt; + a X`` Close the current region
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">c</span></code> Create a new window (with shell)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">“</span></code> List all window</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">0</span></code> Switch to window 0 (by number)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">A</span></code> Rename the current window</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">S</span></code> Split current region horizontally into two regions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">|</span></code> Split current region vertically into two regions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">tab</span></code> Switch the input focus to the next region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span></code> Toggle between the current and previous region</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">Q</span></code>  Close all regions but the current one</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CTRL&gt;</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">X</span></code> Close the current region</p></li>
+</ul>
 </div>
 </div>
 
