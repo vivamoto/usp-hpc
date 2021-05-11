@@ -1,8 +1,8 @@
 Resources for Researchers
 =========================
 
-Systematic review
------------------
+Systematic literature review
+----------------------------
 
 `Parsifal <https://parsif.al/>`_ is an online tool designed to support researchers to perform systematic literature reviews within the context of Software Engineering. Geographically distributed researchers can work together within a shared workspace, designing the protocol and conducting the research.
 
@@ -29,9 +29,30 @@ The curriculum includes:
 
 .. youtube:: Z1mBTHw3xVo
 
+Reference managers
+------------------
+
+Reference managers help collect, organize and share references and create citations in various formats. `Mendeley <https://www.mendeley.com>`_ and `Zotero <https://www.zotero.org/>`_ are free reference managers.
+
+Mendeley
+^^^^^^^^
+`Mendeley <https://www.mendeley.com>`_ simplifies your workflow, so you can focus on achieving your goals.
+
+Zotero
+^^^^^^
+
+`Zotero <https://www.zotero.org/>`_ is a free, easy-to-use tool to help you collect, organize, cite, and share research.
 
 Datasets
 --------
+
+Mendeley
+^^^^^^^^
+
+`Mendeley Data <https://data.mendeley.com/>`_ is a secure cloud-based repository where you can store your data, ensuring it is easy to share, access and cite, wherever you are.
+
+Search 28.1 million datasets from domain-specific and cross-domain repositories.
+
 
 OpenML
 ^^^^^^
@@ -60,8 +81,8 @@ Key features:
 * Query, download and reuse all shared runs
 
 
-Tensorflow
-^^^^^^^^^^
+Tensorflow Datasets
+^^^^^^^^^^^^^^^^^^^
 
 Tensorflow Datasets (TFDS) provides a collection of ready-to-use datasets for use with TensorFlow, Jax, and other Machine Learning frameworks.
 
@@ -85,11 +106,14 @@ Google provides a search engine for datasets. Discover datasets hosted in thousa
 https://datasetsearch.research.google.com/
 
 
+
 PyTorch
 ^^^^^^^^
 
 Torch Audio: https://pytorch.org/audio/stable/datasets.html
+
 Torchvision: https://pytorch.org/vision/stable/datasets.html
+
 Torch text: https://pytorch.org/text/stable/datasets.html
 
 
