@@ -6,7 +6,9 @@
 Welcome to USP HPC's documentation!
 ===================================
 
-High-Performance Computing (HPC) at Universidade de Sao Paulo (USP) comprises two clusters of servers with the following attributes:
+High-Performance Computing (HPC) at Universidade de Sao Paulo (USP) comprises two clusters of servers for parallel and distributed computing for scientific research. Use Python libraries to train machine and deep learning models in a single server on GPU and scale up to the full cluster for large datasets. 
+
+Common attributes:
 
 * Workload manager (Slurm) that schedules jobs in all servers.
 * Shared network file system visible to all servers.
