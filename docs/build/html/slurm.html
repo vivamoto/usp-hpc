@@ -110,6 +110,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Other Information</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources for Researchers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="support.html">Getting Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -186,13 +187,13 @@
 <p>The Slurm manages the amount of resources allocated to each job. The number of nodes, CPU cores, memory, GPUs and period are examples of resources one can allocate to a particular job. This is ideal for distributed computing among several nodes.</p>
 <p>Machine learning and deep learning models can be trained in HPC with Tensorflow, PyTorch, Dask or other distributed computing library.</p>
 <p>Read the official <a class="reference external" href="https://slurm.schedmd.com/quickstart.html">Quick Start User Guide</a> for an overview of the architecture, commands and examples.</p>
-<p>Princeton Research Computing also provides a good <a class="reference external" href="https://researchcomputing.princeton.edu/support/knowledge-base/slurm">introduction</a></p>
+<p>Princeton Research Computing also provides a good <a class="reference external" href="https://researchcomputing.princeton.edu/support/knowledge-base/slurm">introduction</a> to Slurm.</p>
 <div class="section" id="commands">
 <h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
 <p>This introductory video shows some useful commands.</p>
 <div class="youtube_wrapper" style="">
 <iframe allowfullscreen="true" src="https://www.youtube.com/embed/U42qlYkzP9k" style="border: 0; height: 345px; width: 560px">
-</iframe></div><p>Here’s a list of some commonly used user commands. See Slurm <a class="reference external" href="https://slurm.schedmd.com/man_index.html">man pages</a> for a complete list of commands or download the  <a class="reference external" href="https://slurm.schedmd.com/pdfs/summary.pdf">command summary</a> PDF. Note that all Slurm commands start with <strong>s</strong>.</p>
+</iframe></div><p>Here’s a list of some commonly used user commands. See Slurm <a class="reference external" href="https://slurm.schedmd.com/man_index.html">man pages</a> for a complete list of commands or download the  <a class="reference download internal" download="" href="_downloads/ed645709b8b700878a7e0385574b6c60/summary.pdf"><code class="xref download docutils literal notranslate"><span class="pre">command</span> <span class="pre">summary</span> <span class="pre">PDF</span></code></a>. Note that all Slurm commands start with <strong>‘s’</strong>.</p>
 <p><strong>sbatch</strong> is used to submit a job script for later execution. The script will typically contain one or more srun commands to launch parallel tasks.</p>
 <p><strong>scancel</strong> is used to cancel a pending or running job or job step. It can also be used to send an arbitrary signal to all processes associated with a running job or job step.</p>
 <p><strong>scontrol</strong> is the administrative tool used to view and/or modify Slurm state. Note that many scontrol commands can only be executed as user root.</p>
@@ -201,77 +202,77 @@
 </div>
 <div class="section" id="job-schedule">
 <h2>Job schedule<a class="headerlink" href="#job-schedule" title="Permalink to this headline">¶</a></h2>
-<p>Make sure your script saves trained models, plots and result tables and prints progress status during run time:</p>
+<p><a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">UiT The Arctic University of Norway</a> provides a list of job script examples.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -v
-#SBATCH --partition=GPUSP4
-#SBATCH --ntasks=2              # number of tasks / mpi processes
-#SBATCH --cpus-per-task=8       # Number OpenMP Threads per process
-#SBATCH --job-name=tr-ae        # Job name: TReina AutoEncoder
-#SBATCH --time=3-08:00:00       # Se voce nao especificar, o default é 8 horas. O limite é 80 horas.
-#SBATCH --gres=gpu:tesla:2      # para solicitar uma GPU
-# Get email notification when job finishes or fails
-#SBATCH --mail-type=ALL         # notifications for job done &amp; fail
-#SBATCH --mail-user=vivamoto@yahoo.com.br
+#SBATCH --partition=GPUSP4      # partition name, always &#39;GPUSP4&#39;
+#SBATCH --job-name=tr-ae        # job name
+#SBATCH --nodes=1               # number of nodes allocated for this job
+#SBATCH --ntasks=2              # total number of tasks / mpi processes
+#SBATCH --cpus-per-task=8       # number OpenMP Threads per process
+#SBATCH --time=08:00:00         # total run time limit ([[D]D-]HH:MM:SS). Default is 8 hours, maximum 80 hours.
+#SBATCH --gres=gpu:tesla:2      # number of GPUs
+# Get email notification when job begins, finishes or fails
+#SBATCH --mail-type=ALL         # type of notification: BEGIN, END, FAIL, ALL
+#SBATCH --mail-user=your@mail   # e-mail address
 
-#OpenMP settings:
+# OpenMP settings used for parallel processing.
+# Check your library documentation for custom configuration (Tensorflow, PyTorch, Dask, etc)
+# Reference: https://www.openmp.org/spec-html/5.0/openmpch6.html#openmpse50.html
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export OMP_PLACES=threads
 export OMP_PROC_BIND=spread
 
-# OpenMP settings for Tensorflow:
-# we set OMP_NUM_THREADS to the number cpu cores per MPI task
-#export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}  # Number of physical cores
-#export KMP_AFFINITY=granularity=fine,compact,1,0
-#export KMP_BLOCKTIME=0         # (or 1)
-#export KMP_SETTINGS=TRUE
-#export TF_XLA_FLAGS=--tf_xla_enable_xla_devices
-
+# Slurm controller sets these variables in the environment of the batch script
+# More variables at https://slurm.schedmd.com/sbatch.html#lbAK
 echo $SLURM_JOB_ID              # ID of job allocation
-echo $SLURM_SUBMIT_DIR          # Directory job where was submitted
-echo $SLURM_JOB_NODELIST        # File containing allocated hostnames
+echo $SLURM_SUBMIT_DIR          # The directory from which sbatch was invoked
+echo $SLURM_JOB_NODELIST        # List of nodes allocated to the job
 echo $SLURM_NTASKS              # Total number of cores for job
 
-#Carregar modulos necessarios (&quot;module avail&quot; listará o que está disponível para o compilador selecionado)
+# Load modules. Use &quot;module avail&quot; to list available modules.
+# This example loads a custom module.
 module use --append /scratch/11568881/modulefiles/
 module load Miniconda/1.0
-#module load Anaconda/3-2019.03 cuda/10.1
 
-# Autoencoder settings
-export DEBUG_MODE=FALSE
-export PROJETO=/scratch/11568881/projeto/
-export LOG=/scratch/11568881/projeto/log/
-export PYTHON=/scratch/11568881/miniconda3/bin/
+# Define directories used in this script
+export PROJ=$HOME/project/            # project directory
+export LOG=$HOME/project/log/         # log directory
+export PYTHON=$HOME/miniconda3/bin/   # path to Python executable
 
-# System info
-bash $PROJETO/system_info.sh &gt;&gt; $LOG/system_info_$SLURM_JOB_NODELIST\.log
-srun bash $PROJETO/system_info.sh &gt;&gt; $LOG/system_info_srun_$SLURM_JOB_NODELIST\.log
+# Debug mode loads small dataset and runs for few epochs.
+export DEBUG_MODE=FALSE         #
 
-#run the application:
+# System info (optional). Get hardware, Linux and Python libraries information
+bash $PROJ/system_info.sh &gt;&gt; $LOG/system_info_$SLURM_JOB_NODELIST\.log
+
+# Run the application.
+# These examples train a neural network with different architectures passed
+# as environment variables.
 export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
 export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJETO/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
 
 export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
 export AE_KERNEL=5_5_3_3_3_3    # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJETO/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
 
 export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
 export AE_KERNEL=5_5_3_3_3      # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJETO/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
 
 export AE_ARCH=1_2_4_6          # Number of filters in each layer
 export AE_KERNEL=5_5_3_3        # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJETO/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
 
 export AE_ARCH=1_2_4            # Number of filters in each layer
 export AE_KERNEL=5_5_3          # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJETO/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
 </pre></div>
 </div>
 <p>See more examples in <a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">HPC-UiT documentation</a>.</p>

@@ -76,6 +76,7 @@ Cluster **lince**:
 .. toctree::
    :caption: Other Information
 
+   resources
    support
    about
    license 
