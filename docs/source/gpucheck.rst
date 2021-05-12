@@ -7,7 +7,7 @@ You may check the GPU usage with the ``nvidia-smi`` command in any server except
 
 Example of GPU using 67MiB of memory usage, 74% and 0% utilization on GPU 0 and 1 respectively and process ID 29150::
 
-    (base) [11568881@lince2-002:~]$ nvidia-smi
+    $ nvidia-smi
     Sun May  2 16:54:50 2021
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
@@ -28,12 +28,12 @@ Example of GPU using 67MiB of memory usage, 74% and 0% utilization on GPU 0 and 
     |=============================================================================|
     |    0     29150      C   ...gramas/intel/gromacs-5.1.4-cuda/bin/gmx    67MiB |
     +-----------------------------------------------------------------------------+
-    (base) [11568881@lince2-002:~]$
+    
 
 
 Message "No running processes found" on idle GPUs::
 
-    (base) [11568881@lince2-001:~]$ nvidia-smi
+    $ nvidia-smi
     Sun May  2 16:55:18 2021
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
@@ -54,22 +54,20 @@ Message "No running processes found" on idle GPUs::
     |=============================================================================|
     |  No running processes found                                                 |
     +-----------------------------------------------------------------------------+
-    (base) [11568881@lince2-001:~]$
+    $
 
 
 Example of error message::
 
-    (base) [11568881@lince2-008:~]$ nvidia-smi
+    $ nvidia-smi
     Unable to determine the device handle for GPU 0000:05:00.0: GPU is lost.  Reboot the system to recover this GPU
 
-
-    (base) [11568881@lince2-008:~]$
 
 
 Check all servers
 -----------------
 
-A more practical way to check the GPU usage in all servers is using a script. The ``gpu_mon.py`` :ref:`gpumon` script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs and creates a bar plot::
+A more practical way to check the GPU usage in all servers is using a script. The ``gpu_mon.py`` script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs and creates a bar plot::
 
 	$ python gpu_mon.py
 	===== Idle GPUs ==========
@@ -85,7 +83,6 @@ A more practical way to check the GPU usage in all servers is using a script. Th
 .. image:: images/gpu_usage.png
 
 
-.. _gpumon:
 gpu_mon script::
 
 	#!/scratch/11568881/miniconda3/bin/python

@@ -99,8 +99,8 @@ The `RAPIDS <https://rapids.ai/index.html>`_ suite of open source software libra
 
 	$ conda install -c rapidsai -c nvidia -c conda-forge rapids-blazing=0.19 python=3.8 cudatoolkit=10.1
 
-Test installation
------------------
+Installation tests
+------------------
 
 After installing the libraries, run Python and import the libraries to confirm the correct version::
 

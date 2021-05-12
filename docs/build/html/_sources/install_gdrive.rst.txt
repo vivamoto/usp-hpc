@@ -68,11 +68,13 @@ Folder synchronization
 
 ``gdrive`` creates a ``fileId`` for each file and folder stored in drive. Use this ``fileId`` to sync a folder. In this example, the  ``fileId`` is ``0B3X9GlR6EmbnOEd6cEh6bU9XZWM`` and the folder ``_release/bin`` is being synced::
 
-	# Create directory on drive
+Create directory on drive::
+
 	$ gdrive mkdir drive-bin
 	Directory 0B3X9GlR6EmbnOEd6cEh6bU9XZWM created
 
-	# Sync to drive
+Sync to drive::
+
 	$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 	Starting sync...
 	Collecting local and remote file information...
@@ -115,10 +117,12 @@ Folder synchronization
 	[0026/0026] Uploading windows/gdrive-windows-x64.exe -> drive-bin/windows/gdrive-windows-x64.exe
 	Sync finished in 1m18.891946279s
 
-	# Add new local file
+Add new local file::
+
 	$ echo "google drive binaries" > _release/bin/readme.txt
 
-	# Sync again
+Sync again::
+
 	$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 	Starting sync...
 	Collecting local and remote file information...
@@ -128,10 +132,12 @@ Folder synchronization
 	[0001/0001] Uploading readme.txt -> drive-bin/readme.txt
 	Sync finished in 2.201339535s
 
-	# Modify local file
+Modify local file::
+
 	$ echo "for all platforms" >> _release/bin/readme.txt
 
-	# Sync again
+Sync again::
+
 	$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 	Starting sync...
 	Collecting local and remote file information...
@@ -202,7 +208,7 @@ Schedule daily backup of your folder with ``crontab``. Use this template::
 	# ==============================================================================
 	#
 	# Set Path
-	PATH=/bin:/usr/bin:/usr/local/bin:/scratch/11568881
+	PATH=/bin:/usr/bin:/usr/local/bin:/scratch/<USER_ID>
 	#
 	# Backup of work folder daily at 02:00 AM
 	# (change NUSP, folder name and fileId)

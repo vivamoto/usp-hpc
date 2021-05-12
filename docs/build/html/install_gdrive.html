@@ -106,13 +106,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="code_development.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linux.html">Useful Linux Commands</a></li>
 </ul>
 <p class="caption"><span class="caption-text">SLURM</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux.html">Useful Linux Commands</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Other Information</span></p>
 <ul>
@@ -250,12 +250,13 @@ $ mv ~/go/src/github.com/prasmussen/gdrive/gdrive ~/.local/bin
 <div class="section" id="folder-synchronization">
 <h2>Folder synchronization<a class="headerlink" href="#folder-synchronization" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">gdrive</span></code> creates a <code class="docutils literal notranslate"><span class="pre">fileId</span></code> for each file and folder stored in drive. Use this <code class="docutils literal notranslate"><span class="pre">fileId</span></code> to sync a folder. In this example, the  <code class="docutils literal notranslate"><span class="pre">fileId</span></code> is <code class="docutils literal notranslate"><span class="pre">0B3X9GlR6EmbnOEd6cEh6bU9XZWM</span></code> and the folder <code class="docutils literal notranslate"><span class="pre">_release/bin</span></code> is being synced:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create directory on drive
-$ gdrive mkdir drive-bin
+<p>Create directory on drive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdrive mkdir drive-bin
 Directory 0B3X9GlR6EmbnOEd6cEh6bU9XZWM created
-
-# Sync to drive
-$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+</pre></div>
+</div>
+<p>Sync to drive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 Starting sync...
 Collecting local and remote file information...
 Found 32 local files and 0 remote files
@@ -296,12 +297,14 @@ Found 32 local files and 0 remote files
 [0025/0026] Uploading windows/gdrive-windows-386.exe -&gt; drive-bin/windows/gdrive-windows-386.exe
 [0026/0026] Uploading windows/gdrive-windows-x64.exe -&gt; drive-bin/windows/gdrive-windows-x64.exe
 Sync finished in 1m18.891946279s
-
-# Add new local file
-$ echo &quot;google drive binaries&quot; &gt; _release/bin/readme.txt
-
-# Sync again
-$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+</pre></div>
+</div>
+<p>Add new local file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;google drive binaries&quot; &gt; _release/bin/readme.txt
+</pre></div>
+</div>
+<p>Sync again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 Starting sync...
 Collecting local and remote file information...
 Found 33 local files and 32 remote files
@@ -309,12 +312,14 @@ Found 33 local files and 32 remote files
 1 remote files are missing
 [0001/0001] Uploading readme.txt -&gt; drive-bin/readme.txt
 Sync finished in 2.201339535s
-
-# Modify local file
-$ echo &quot;for all platforms&quot; &gt;&gt; _release/bin/readme.txt
-
-# Sync again
-$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+</pre></div>
+</div>
+<p>Modify local file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &quot;for all platforms&quot; &gt;&gt; _release/bin/readme.txt
+</pre></div>
+</div>
+<p>Sync again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
 Starting sync...
 Collecting local and remote file information...
 Found 33 local files and 33 remote files
@@ -382,7 +387,7 @@ gdrive help &lt;command&gt; &lt;subcommand&gt;                             Print
 # ==============================================================================
 #
 # Set Path
-PATH=/bin:/usr/bin:/usr/local/bin:/scratch/11568881
+PATH=/bin:/usr/bin:/usr/local/bin:/scratch/&lt;USER_ID&gt;
 #
 # Backup of work folder daily at 02:00 AM
 # (change NUSP, folder name and fileId)

@@ -97,13 +97,13 @@ Add the module path to MODULEPATH
 
 Now that the module file has been created, one just needs to add the following line to your ``~/.bashrc`` file so that it will be found::
 
-	module use --append /scratch/11568881/modulefiles/
+	module use --append /scratch/<USER_ID>/modulefiles/
 
 The next time you log in you will be able to run **module avail** or **module load** on the new module.
 
 You also need to add these lines in your SLURM schedule script to load the environment variables::
 
-	module use --append /scratch/11568881/modulefiles/
+	module use --append /scratch/<USER_ID>/modulefiles/
 	module load Miniconda/1.0
 
 

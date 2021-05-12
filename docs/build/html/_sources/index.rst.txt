@@ -65,15 +65,15 @@ Cluster **lince**:
 
    code_development
    tensorflow_settings
-   gpucheck
-   linux
 
 .. toctree::
    :maxdepth: 2
    :caption: SLURM
 
-   slurm
    custom_module
+   slurm
+   gpucheck
+   linux
 
 .. toctree::
    :caption: Other Information

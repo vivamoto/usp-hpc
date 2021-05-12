@@ -42,7 +42,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Useful Linux Commands" href="linux.html" />
-    <link rel="prev" title="Tensorflow configuration" href="tensorflow_settings.html" /> 
+    <link rel="prev" title="Slurm" href="slurm.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -94,19 +94,19 @@
 <li class="toctree-l1"><a class="reference internal" href="install_gdrive.html">Install Google Drive</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="code_development.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SLURM</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Health Check</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#check-all-servers">Check all servers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="linux.html">Useful Linux Commands</a></li>
-</ul>
-<p class="caption"><span class="caption-text">SLURM</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Other Information</span></p>
 <ul>
@@ -186,7 +186,7 @@
 <p>Each <strong>lince</strong> server has 2 NVIDIA Tesla GPUs installed. This cluster should be used to run GPU jobs; if you don’t need GPU then use <strong>aguia</strong> instead.</p>
 <p>You may check the GPU usage with the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> command in any server except the login server which is used only for job scheduling.</p>
 <p>Example of GPU using 67MiB of memory usage, 74% and 0% utilization on GPU 0 and 1 respectively and process ID 29150:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-002:~]$ nvidia-smi
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
 Sun May  2 16:54:50 2021
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
@@ -207,11 +207,10 @@ Sun May  2 16:54:50 2021
 |=============================================================================|
 |    0     29150      C   ...gramas/intel/gromacs-5.1.4-cuda/bin/gmx    67MiB |
 +-----------------------------------------------------------------------------+
-(base) [11568881@lince2-002:~]$
 </pre></div>
 </div>
 <p>Message “No running processes found” on idle GPUs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-001:~]$ nvidia-smi
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
 Sun May  2 16:55:18 2021
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
@@ -232,20 +231,17 @@ Sun May  2 16:55:18 2021
 |=============================================================================|
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
-(base) [11568881@lince2-001:~]$
+$
 </pre></div>
 </div>
 <p>Example of error message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) [11568881@lince2-008:~]$ nvidia-smi
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nvidia-smi
 Unable to determine the device handle for GPU 0000:05:00.0: GPU is lost.  Reboot the system to recover this GPU
-
-
-(base) [11568881@lince2-008:~]$
 </pre></div>
 </div>
 <div class="section" id="check-all-servers">
 <h2>Check all servers<a class="headerlink" href="#check-all-servers" title="Permalink to this headline">¶</a></h2>
-<p>A more practical way to check the GPU usage in all servers is using a script. The <code class="docutils literal notranslate"><span class="pre">gpu_mon.py</span></code> <span class="xref std std-ref">gpumon</span> script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs and creates a bar plot:</p>
+<p>A more practical way to check the GPU usage in all servers is using a script. The <code class="docutils literal notranslate"><span class="pre">gpu_mon.py</span></code> script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs and creates a bar plot:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python gpu_mon.py
 ===== Idle GPUs ==========
 lince2-001.hpc.usp.br
@@ -382,7 +378,7 @@ lince2-011.hpc.usp.br
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="linux.html" class="btn btn-neutral float-right" title="Useful Linux Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="tensorflow_settings.html" class="btn btn-neutral float-left" title="Tensorflow configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slurm.html" class="btn btn-neutral float-left" title="Slurm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
