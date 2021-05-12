@@ -1,5 +1,5 @@
-GPU Health Check
-================
+GPU Usage
+=========
 
 Each **lince** server has 2 NVIDIA Tesla GPUs installed. This cluster should be used to run GPU jobs; if you don't need GPU then use **aguia** instead.
 

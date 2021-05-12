@@ -66,7 +66,7 @@ The complete list of options in ``gdrive`` is available at the developer's `webs
 Folder synchronization
 ^^^^^^^^^^^^^^^^^^^^^^
 
-``gdrive`` creates a ``fileId`` for each file and folder stored in drive. Use this ``fileId`` to sync a folder. In this example, the  ``fileId`` is ``0B3X9GlR6EmbnOEd6cEh6bU9XZWM`` and the folder ``_release/bin`` is being synced::
+``gdrive`` creates a ``fileId`` for each file and folder stored in drive. Use this ``fileId`` to sync a folder. In this example, the  ``fileId`` is ``0B3X9GlR6EmbnOEd6cEh6bU9XZWM`` and the folder ``_release/bin`` is being synced.
 
 Create directory on drive::
 

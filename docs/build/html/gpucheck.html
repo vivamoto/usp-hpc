@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>GPU Health Check &mdash; USP HPC 0.0.1 documentation</title>
+  <title>GPU Usage &mdash; USP HPC 0.0.1 documentation</title>
   
 
   
@@ -102,7 +102,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="custom_module.html">Working with modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slurm.html">Slurm</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Health Check</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GPU Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#check-all-servers">Check all servers</a></li>
 </ul>
 </li>
@@ -162,7 +162,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>GPU Health Check</li>
+      <li>GPU Usage</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,8 +181,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="gpu-health-check">
-<h1>GPU Health Check<a class="headerlink" href="#gpu-health-check" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="gpu-usage">
+<h1>GPU Usage<a class="headerlink" href="#gpu-usage" title="Permalink to this headline">¶</a></h1>
 <p>Each <strong>lince</strong> server has 2 NVIDIA Tesla GPUs installed. This cluster should be used to run GPU jobs; if you don’t need GPU then use <strong>aguia</strong> instead.</p>
 <p>You may check the GPU usage with the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> command in any server except the login server which is used only for job scheduling.</p>
 <p>Example of GPU using 67MiB of memory usage, 74% and 0% utilization on GPU 0 and 1 respectively and process ID 29150:</p>
