@@ -1,7 +1,7 @@
 Working with modules
 ====================
 
-Modules are a convenient way to manage environment variables for applications use. Unless you use the default installation of Anaconda available in HPC, you'll need to modify custom modules. This section briefly explains how to work with modules and provides a custom module for Miniconda. See the references [#ref]_ to learn more about modules.
+Modules are a convenient way to manage environment variables for applications use. Unless you use the default installation of Anaconda available in HPC, you'll need to create custom modules. This section briefly explains how to work with modules and provides a custom module for Miniconda. See the references [#ref]_ to learn more about modules.
 
 Environment modules set environment variables with specific values for each application. Run **module avail** to list all modules available::
 
@@ -39,12 +39,29 @@ Environment modules set environment variables with specific values for each appl
 	Use "module spider" to find all possible modules.
 	Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
 
-
-
-You can load a module with ``module load``::
+Notice that default modules have a ``(D)`` besides the name and loaded modules come with a ``(L)``. You can load a module with ``module load``::
 
 	$ module load Anaconda/3-2019.03
 
+Clean all loaded modules with ``module purge``::
+
+	$ module purge
+
+Run ``module show`` to list the commands executed in the module::
+
+	$ module show Anaconda/3-2020.11
+	----------------------------------------------------------------------------------------------------------------------------------
+	   /opt/ohpc/pub/modulefiles/Anaconda/3-2020.11.lua:
+	----------------------------------------------------------------------------------------------------------------------------------
+	help([[This module loads /scratch/apps/gnu/anaconda3
+	]])
+	conflict("Anaconda","Anaconda3","anaconda","python")
+	setenv("INSTALL_DIR","/scratch/apps/gnu/anaconda3")
+	prepend_path("LD_LIBRARY_PATH","/scratch/apps/gnu/anaconda3")
+	prepend_path("LD_LIBRARY_PATH","/scratch/apps/gnu/anaconda3/libexec")
+	prepend_path("INCLUDE","/scratch/apps/gnu/anaconda3/include")
+	prepend_path("PATH","/scratch/apps/gnu/anaconda3/sbin")
+	prepend_path("PATH","/scratch/apps/gnu/anaconda3/bin")
 
 Create custom module
 --------------------
@@ -88,6 +105,101 @@ You also need to add these lines in your SLURM schedule script to load the envir
 
 	module use --append /scratch/11568881/modulefiles/
 	module load Miniconda/1.0
+
+
+Module usage
+------------
+
+Just run ``module`` to list all available options::
+
+	$ module
+
+	Modules based on Lua: Version 7.8.15  2019-01-16 12:46 -06:00
+		by Robert McLay mclay@tacc.utexas.edu
+
+	module [options] sub-command [args ...]
+
+	Help sub-commands:
+	------------------
+	  help                              prints this message
+	  help                module [...]  print help message from module(s)
+
+	Loading/Unloading sub-commands:
+	-------------------------------
+	  load | add          module [...]  load module(s)
+	  try-load | try-add  module [...]  Add module(s), do not complain if not found
+	  del | unload        module [...]  Remove module(s), do not complain if not found
+	  swap | sw | switch  m1 m2         unload m1 and load m2
+	  purge                             unload all modules
+	  refresh                           reload aliases from current list of modules.
+	  update                            reload all currently loaded modules.
+
+	Listing / Searching sub-commands:
+	---------------------------------
+	  list                              List loaded modules
+	  list                s1 s2 ...     List loaded modules that match the pattern
+	  avail | av                        List available modules
+	  avail | av          string        List available modules that contain "string".
+	  spider                            List all possible modules
+	  spider              module        List all possible version of that module file
+	  spider              string        List all module that contain the "string".
+	  spider              name/version  Detailed information about that version of the module.
+	  whatis              module        Print whatis information about module
+	  keyword | key       string        Search all name and whatis that contain "string".
+
+	Searching with Lmod:
+	--------------------
+	  All searching (spider, list, avail, keyword) support regular expressions:
+
+
+	  -r spider           '^p'          Finds all the modules that start with `p' or `P'
+	  -r spider           mpi           Finds all modules that have "mpi" in their name.
+	  -r spider           'mpi$         Finds all modules that end with "mpi" in their name.
+
+	Handling a collection of modules:
+	--------------------------------
+	  save | s                          Save the current list of modules to a user defined "default" collection.
+	  save | s            name          Save the current list of modules to "name" collection.
+	  reset                             The same as "restore system"
+	  restore | r                       Restore modules from the user's "default" or system default.
+	  restore | r         name          Restore modules from "name" collection.
+	  restore             system        Restore module state to system defaults.
+	  savelist                          List of saved collections.
+	  describe | mcc      name          Describe the contents of a module collection.
+	  disable             name          Disable a collection.
+
+	Deprecated commands:
+	--------------------
+	  getdefault          [name]        load name collection of modules or user's "default" if no name given.
+										===> Use "restore" instead <====
+	  setdefault          [name]        Save current list of modules to name if given, otherwise save as the default list for you the
+										user.
+										===> Use "save" instead. <====
+
+	Miscellaneous sub-commands:
+	---------------------------
+	  is-loaded           modulefile    return true if module is loaded
+	  is-avail            modulefile    return true if module can be loaded
+	  show                modulefile    show the commands in the module file.
+	  use [-a]            path          Prepend or Append path to MODULEPATH.
+	  unuse               path          remove path from MODULEPATH.
+	  tablelist                         output list of active modules as a lua table.
+
+	Important Environment Variables:
+	--------------------------------
+	  LMOD_COLORIZE                     If defined to be "YES" then Lmod prints properties and warning in color.
+
+		--------------------------------------------------------------------------------------------------------------------------------
+
+	Lmod Web Sites
+
+	  Documentation:    http://lmod.readthedocs.org
+	  Github:           https://github.com/TACC/Lmod
+	  Sourceforge:      https://lmod.sf.net
+	  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+	  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+		--------------------------------------------------------------------------------------------------------------------------------
 
 
 .. [#ref] References: 

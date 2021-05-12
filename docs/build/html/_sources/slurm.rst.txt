@@ -3,7 +3,7 @@ Slurm
 
 Slurm Workload Manager is an open source, fault-tolerant, and highly scalable cluster management and job scheduling system for large and small Linux clusters. It is used by many of the world's supercomputers and computer clusters.
 
-The Slurm manages the amount of resources allocated to each job. The number of nodes, CPU cores, memory, GPUs and period are examples of resources one can allocate to a particular job. This is ideal for distributed computing among several nodes.
+Slurm manages the amount of resources allocated to each job. The number of nodes, CPU cores, memory, GPUs and period are examples of resources one can allocate to a particular job. This is ideal for distributed computing among several nodes.
 
 Machine learning and deep learning models can be trained in HPC with Tensorflow, PyTorch, Dask or other distributed computing library.
 
@@ -21,36 +21,47 @@ This introductory video shows some useful commands.
 
 Here's a list of some commonly used user commands. See Slurm `man pages <https://slurm.schedmd.com/man_index.html>`_ for a complete list of commands or download the  :download:`command summary PDF<_static/summary.pdf>`. Note that all Slurm commands start with **'s'**.
 
-**sbatch** is used to submit a job script for later execution. The script will typically contain one or more srun commands to launch parallel tasks.
-
-**scancel** is used to cancel a pending or running job or job step. It can also be used to send an arbitrary signal to all processes associated with a running job or job step.
-
-**scontrol** is the administrative tool used to view and/or modify Slurm state. Note that many scontrol commands can only be executed as user root.
-
-**squeue** reports the state of jobs or job steps. It has a wide variety of filtering, sorting, and formatting options. By default, it reports the running jobs in priority order and then the pending jobs in priority order.
-
-**srun** is used to submit a job for execution or initiate job steps in real time. **srun** has a wide variety of options to specify resource requirements, including: minimum and maximum node count, processor count, specific nodes to use or not use, and specific node characteristics (so much memory, disk space, certain required features, etc.). A job can contain multiple job steps executing sequentially or in parallel on independent or shared resources within the job's node allocation.
-
-
-
-
-
++-----------------------+----------------------------------------------------+
+| Command               | Description                                        |
++=======================+====================================================+
+| sbatch <slurm_script> | Submit a job script for later execution.           |
++-----------------------+----------------------------------------------------+
+| scancel <jobid>       | Cancel a pending or running job or job step        |
++-----------------------+----------------------------------------------------+
+| srun                  | Parallel job launcher (Slurm analog of mpirun)     |
++-----------------------+----------------------------------------------------+
+| squeue                | Show all jobs in the queue                         |
++-----------------------+----------------------------------------------------+
+| squeue -u <username>  | Show jobs in the queue for a specific user         |
++-----------------------+----------------------------------------------------+
+| squeue --start        | Report the expected start time for pending jobs    |
++-----------------------+----------------------------------------------------+
+| squeue -j <jobid>     | Show the nodes allocated to a running job          |
++-----------------------+----------------------------------------------------+
+| scontrol show config  | View default parameter settings                    |
++-----------------------+----------------------------------------------------+
+| sinfo                 | Show cluster status                                     |
++-----------------------+----------------------------------------------------+
 
 
 Job schedule
 ------------
-`UiT The Arctic University of Norway <https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html>`_ provides a list of job script examples.
 
-::
+Submit a script to the queue with ``sbatch <script>``::
 
+	$ sbatch script.sh
 
+	
+The options of ``sbatch`` command may be inserted into the script following the ``#SBATCH`` directive::
+
+	$ cat script.sh
 	#!/bin/bash -v
-	#SBATCH --partition=GPUSP4      # partition name, always 'GPUSP4'
+	#SBATCH --partition=GPUSP4      # partition name. lince = 'GPUSP4', aguia = 'SP2'
 	#SBATCH --job-name=tr-ae        # job name
 	#SBATCH --nodes=1               # number of nodes allocated for this job
 	#SBATCH --ntasks=2              # total number of tasks / mpi processes
 	#SBATCH --cpus-per-task=8       # number OpenMP Threads per process
-	#SBATCH --time=08:00:00         # total run time limit ([[D]D-]HH:MM:SS). Default is 8 hours, maximum 80 hours.
+	#SBATCH --time=08:00:00         # total run time limit ([[D]D-]HH:MM:SS)
 	#SBATCH --gres=gpu:tesla:2      # number of GPUs
 	# Get email notification when job begins, finishes or fails
 	#SBATCH --mail-type=ALL         # type of notification: BEGIN, END, FAIL, ALL
@@ -76,46 +87,12 @@ Job schedule
 	module use --append /scratch/11568881/modulefiles/
 	module load Miniconda/1.0
 
-	# Define directories used in this script
-	export PROJ=$HOME/project/            # project directory
-	export LOG=$HOME/project/log/         # log directory
-	export PYTHON=$HOME/miniconda3/bin/   # path to Python executable
-
-	# Debug mode loads small dataset and runs for few epochs.
-	export DEBUG_MODE=FALSE         # 
-
-	# System info (optional). Get hardware, Linux and Python libraries information
-	bash $PROJ/system_info.sh >> $LOG/system_info_$SLURM_JOB_NODELIST\.log
-
 	# Run the application.
-	# These examples train a neural network with different architectures passed
-	# as environment variables.
-	export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
-	export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
 	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
-	srun $PYTHON/python3 $PROJ/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+	srun <train_model.py>
 
-	export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
-	export AE_KERNEL=5_5_3_3_3_3    # Filter size
-	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
-	srun $PYTHON/python3 $PROJ/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
+`UiT The Arctic University of Norway <https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html>`_ provides additional job script examples.
 
-	export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
-	export AE_KERNEL=5_5_3_3_3      # Filter size
-	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
-	srun $PYTHON/python3 $PROJ/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
-
-	export AE_ARCH=1_2_4_6          # Number of filters in each layer
-	export AE_KERNEL=5_5_3_3        # Filter size
-	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
-	srun $PYTHON/python3 $PROJ/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
-
-	export AE_ARCH=1_2_4            # Number of filters in each layer
-	export AE_KERNEL=5_5_3          # Filter size
-	echo [`date '+%Y-%m-%d %H:%M:%S'`] Running $AE_ARCH
-	srun $PYTHON/python3 $PROJ/autoencoder.py  >>  $LOG/autoencoder_$AE_ARCH\.log  2>&1
-
-See more examples in `HPC-UiT documentation <https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html>`_.
 
 
 

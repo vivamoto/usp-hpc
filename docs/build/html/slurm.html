@@ -95,6 +95,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="code_development.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linux.html">Useful Linux Commands</a></li>
@@ -184,7 +185,7 @@
   <div class="section" id="slurm">
 <h1>Slurm<a class="headerlink" href="#slurm" title="Permalink to this headline">¶</a></h1>
 <p>Slurm Workload Manager is an open source, fault-tolerant, and highly scalable cluster management and job scheduling system for large and small Linux clusters. It is used by many of the world’s supercomputers and computer clusters.</p>
-<p>The Slurm manages the amount of resources allocated to each job. The number of nodes, CPU cores, memory, GPUs and period are examples of resources one can allocate to a particular job. This is ideal for distributed computing among several nodes.</p>
+<p>Slurm manages the amount of resources allocated to each job. The number of nodes, CPU cores, memory, GPUs and period are examples of resources one can allocate to a particular job. This is ideal for distributed computing among several nodes.</p>
 <p>Machine learning and deep learning models can be trained in HPC with Tensorflow, PyTorch, Dask or other distributed computing library.</p>
 <p>Read the official <a class="reference external" href="https://slurm.schedmd.com/quickstart.html">Quick Start User Guide</a> for an overview of the architecture, commands and examples.</p>
 <p>Princeton Research Computing also provides a good <a class="reference external" href="https://researchcomputing.princeton.edu/support/knowledge-base/slurm">introduction</a> to Slurm.</p>
@@ -194,22 +195,22 @@
 <div class="youtube_wrapper" style="">
 <iframe allowfullscreen="true" src="https://www.youtube.com/embed/U42qlYkzP9k" style="border: 0; height: 345px; width: 560px">
 </iframe></div><p>Here’s a list of some commonly used user commands. See Slurm <a class="reference external" href="https://slurm.schedmd.com/man_index.html">man pages</a> for a complete list of commands or download the  <a class="reference download internal" download="" href="_downloads/ed645709b8b700878a7e0385574b6c60/summary.pdf"><code class="xref download docutils literal notranslate"><span class="pre">command</span> <span class="pre">summary</span> <span class="pre">PDF</span></code></a>. Note that all Slurm commands start with <strong>‘s’</strong>.</p>
-<p><strong>sbatch</strong> is used to submit a job script for later execution. The script will typically contain one or more srun commands to launch parallel tasks.</p>
-<p><strong>scancel</strong> is used to cancel a pending or running job or job step. It can also be used to send an arbitrary signal to all processes associated with a running job or job step.</p>
-<p><strong>scontrol</strong> is the administrative tool used to view and/or modify Slurm state. Note that many scontrol commands can only be executed as user root.</p>
-<p><strong>squeue</strong> reports the state of jobs or job steps. It has a wide variety of filtering, sorting, and formatting options. By default, it reports the running jobs in priority order and then the pending jobs in priority order.</p>
-<p><strong>srun</strong> is used to submit a job for execution or initiate job steps in real time. <strong>srun</strong> has a wide variety of options to specify resource requirements, including: minimum and maximum node count, processor count, specific nodes to use or not use, and specific node characteristics (so much memory, disk space, certain required features, etc.). A job can contain multiple job steps executing sequentially or in parallel on independent or shared resources within the job’s node allocation.</p>
 </div>
 <div class="section" id="job-schedule">
 <h2>Job schedule<a class="headerlink" href="#job-schedule" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">UiT The Arctic University of Norway</a> provides a list of job script examples.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -v
-#SBATCH --partition=GPUSP4      # partition name, always &#39;GPUSP4&#39;
+<p>Submit a script to the queue with <code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">&lt;script&gt;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sbatch script.sh
+</pre></div>
+</div>
+<p>The options of <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command may be inserted into the script following the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> directive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat script.sh
+#!/bin/bash -v
+#SBATCH --partition=GPUSP4      # partition name. lince = &#39;GPUSP4&#39;, aguia = &#39;SP2&#39;
 #SBATCH --job-name=tr-ae        # job name
 #SBATCH --nodes=1               # number of nodes allocated for this job
 #SBATCH --ntasks=2              # total number of tasks / mpi processes
 #SBATCH --cpus-per-task=8       # number OpenMP Threads per process
-#SBATCH --time=08:00:00         # total run time limit ([[D]D-]HH:MM:SS). Default is 8 hours, maximum 80 hours.
+#SBATCH --time=08:00:00         # total run time limit ([[D]D-]HH:MM:SS)
 #SBATCH --gres=gpu:tesla:2      # number of GPUs
 # Get email notification when job begins, finishes or fails
 #SBATCH --mail-type=ALL         # type of notification: BEGIN, END, FAIL, ALL
@@ -235,47 +236,12 @@ echo $SLURM_NTASKS              # Total number of cores for job
 module use --append /scratch/11568881/modulefiles/
 module load Miniconda/1.0
 
-# Define directories used in this script
-export PROJ=$HOME/project/            # project directory
-export LOG=$HOME/project/log/         # log directory
-export PYTHON=$HOME/miniconda3/bin/   # path to Python executable
-
-# Debug mode loads small dataset and runs for few epochs.
-export DEBUG_MODE=FALSE         #
-
-# System info (optional). Get hardware, Linux and Python libraries information
-bash $PROJ/system_info.sh &gt;&gt; $LOG/system_info_$SLURM_JOB_NODELIST\.log
-
 # Run the application.
-# These examples train a neural network with different architectures passed
-# as environment variables.
-export AE_ARCH=1_2_4_6_8_10_12  # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3_3_3  # Filter size
 echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4_6_8_10     # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3_3    # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4_6_8        # Number of filters in each layer
-export AE_KERNEL=5_5_3_3_3      # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4_6          # Number of filters in each layer
-export AE_KERNEL=5_5_3_3        # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
-
-export AE_ARCH=1_2_4            # Number of filters in each layer
-export AE_KERNEL=5_5_3          # Filter size
-echo [`date &#39;+%Y-%m-%d %H:%M:%S&#39;`] Running $AE_ARCH
-srun $PYTHON/python3 $PROJ/autoencoder.py  &gt;&gt;  $LOG/autoencoder_$AE_ARCH\.log  2&gt;&amp;1
+srun &lt;train_model.py&gt;
 </pre></div>
 </div>
-<p>See more examples in <a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">HPC-UiT documentation</a>.</p>
+<p><a class="reference external" href="https://hpc-uit.readthedocs.io/en/latest/jobs/examples.html">UiT The Arctic University of Norway</a> provides additional job script examples.</p>
 </div>
 </div>
 

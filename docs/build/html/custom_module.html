@@ -95,6 +95,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Code Development</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="code_development.html">Code development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensorflow_settings.html">Tensorflow configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpucheck.html">GPU Health Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linux.html">Useful Linux Commands</a></li>
@@ -105,6 +106,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Working with modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#create-custom-module">Create custom module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#add-the-module-path-to-modulepath">Add the module path to MODULEPATH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-usage">Module usage</a></li>
 </ul>
 </li>
 </ul>
@@ -183,7 +185,7 @@
             
   <div class="section" id="working-with-modules">
 <h1>Working with modules<a class="headerlink" href="#working-with-modules" title="Permalink to this headline">¶</a></h1>
-<p>Modules are a convenient way to manage environment variables for applications use. Unless you use the default installation of Anaconda available in HPC, you’ll need to modify custom modules. This section briefly explains how to work with modules and provides a custom module for Miniconda. See the references <a class="footnote-reference brackets" href="#ref" id="id1">1</a> to learn more about modules.</p>
+<p>Modules are a convenient way to manage environment variables for applications use. Unless you use the default installation of Anaconda available in HPC, you’ll need to create custom modules. This section briefly explains how to work with modules and provides a custom module for Miniconda. See the references <a class="footnote-reference brackets" href="#ref" id="id1">1</a> to learn more about modules.</p>
 <p>Environment modules set environment variables with specific values for each application. Run <strong>module avail</strong> to list all modules available:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module avail
 
@@ -220,8 +222,28 @@ Use &quot;module spider&quot; to find all possible modules.
 Use &quot;module keyword key1 key2 ...&quot; to search for all possible modules matching any of the &quot;keys&quot;.
 </pre></div>
 </div>
-<p>You can load a module with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code>:</p>
+<p>Notice that default modules have a <code class="docutils literal notranslate"><span class="pre">(D)</span></code> besides the name and loaded modules come with a <code class="docutils literal notranslate"><span class="pre">(L)</span></code>. You can load a module with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module load Anaconda/3-2019.03
+</pre></div>
+</div>
+<p>Clean all loaded modules with <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">purge</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module purge
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">show</span></code> to list the commands executed in the module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module show Anaconda/3-2020.11
+----------------------------------------------------------------------------------------------------------------------------------
+   /opt/ohpc/pub/modulefiles/Anaconda/3-2020.11.lua:
+----------------------------------------------------------------------------------------------------------------------------------
+help([[This module loads /scratch/apps/gnu/anaconda3
+]])
+conflict(&quot;Anaconda&quot;,&quot;Anaconda3&quot;,&quot;anaconda&quot;,&quot;python&quot;)
+setenv(&quot;INSTALL_DIR&quot;,&quot;/scratch/apps/gnu/anaconda3&quot;)
+prepend_path(&quot;LD_LIBRARY_PATH&quot;,&quot;/scratch/apps/gnu/anaconda3&quot;)
+prepend_path(&quot;LD_LIBRARY_PATH&quot;,&quot;/scratch/apps/gnu/anaconda3/libexec&quot;)
+prepend_path(&quot;INCLUDE&quot;,&quot;/scratch/apps/gnu/anaconda3/include&quot;)
+prepend_path(&quot;PATH&quot;,&quot;/scratch/apps/gnu/anaconda3/sbin&quot;)
+prepend_path(&quot;PATH&quot;,&quot;/scratch/apps/gnu/anaconda3/bin&quot;)
 </pre></div>
 </div>
 <div class="section" id="create-custom-module">
@@ -261,6 +283,100 @@ prepend-path MANPATH ${INSTALL_DIR}/share/man
 <p>You also need to add these lines in your SLURM schedule script to load the environment variables:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">use</span> <span class="o">--</span><span class="n">append</span> <span class="o">/</span><span class="n">scratch</span><span class="o">/</span><span class="mi">11568881</span><span class="o">/</span><span class="n">modulefiles</span><span class="o">/</span>
 <span class="n">module</span> <span class="n">load</span> <span class="n">Miniconda</span><span class="o">/</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-usage">
+<h2>Module usage<a class="headerlink" href="#module-usage" title="Permalink to this headline">¶</a></h2>
+<p>Just run <code class="docutils literal notranslate"><span class="pre">module</span></code> to list all available options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module
+
+Modules based on Lua: Version 7.8.15  2019-01-16 12:46 -06:00
+        by Robert McLay mclay@tacc.utexas.edu
+
+module [options] sub-command [args ...]
+
+Help sub-commands:
+------------------
+  help                              prints this message
+  help                module [...]  print help message from module(s)
+
+Loading/Unloading sub-commands:
+-------------------------------
+  load | add          module [...]  load module(s)
+  try-load | try-add  module [...]  Add module(s), do not complain if not found
+  del | unload        module [...]  Remove module(s), do not complain if not found
+  swap | sw | switch  m1 m2         unload m1 and load m2
+  purge                             unload all modules
+  refresh                           reload aliases from current list of modules.
+  update                            reload all currently loaded modules.
+
+Listing / Searching sub-commands:
+---------------------------------
+  list                              List loaded modules
+  list                s1 s2 ...     List loaded modules that match the pattern
+  avail | av                        List available modules
+  avail | av          string        List available modules that contain &quot;string&quot;.
+  spider                            List all possible modules
+  spider              module        List all possible version of that module file
+  spider              string        List all module that contain the &quot;string&quot;.
+  spider              name/version  Detailed information about that version of the module.
+  whatis              module        Print whatis information about module
+  keyword | key       string        Search all name and whatis that contain &quot;string&quot;.
+
+Searching with Lmod:
+--------------------
+  All searching (spider, list, avail, keyword) support regular expressions:
+
+
+  -r spider           &#39;^p&#39;          Finds all the modules that start with `p&#39; or `P&#39;
+  -r spider           mpi           Finds all modules that have &quot;mpi&quot; in their name.
+  -r spider           &#39;mpi$         Finds all modules that end with &quot;mpi&quot; in their name.
+
+Handling a collection of modules:
+--------------------------------
+  save | s                          Save the current list of modules to a user defined &quot;default&quot; collection.
+  save | s            name          Save the current list of modules to &quot;name&quot; collection.
+  reset                             The same as &quot;restore system&quot;
+  restore | r                       Restore modules from the user&#39;s &quot;default&quot; or system default.
+  restore | r         name          Restore modules from &quot;name&quot; collection.
+  restore             system        Restore module state to system defaults.
+  savelist                          List of saved collections.
+  describe | mcc      name          Describe the contents of a module collection.
+  disable             name          Disable a collection.
+
+Deprecated commands:
+--------------------
+  getdefault          [name]        load name collection of modules or user&#39;s &quot;default&quot; if no name given.
+                                                                        ===&gt; Use &quot;restore&quot; instead &lt;====
+  setdefault          [name]        Save current list of modules to name if given, otherwise save as the default list for you the
+                                                                        user.
+                                                                        ===&gt; Use &quot;save&quot; instead. &lt;====
+
+Miscellaneous sub-commands:
+---------------------------
+  is-loaded           modulefile    return true if module is loaded
+  is-avail            modulefile    return true if module can be loaded
+  show                modulefile    show the commands in the module file.
+  use [-a]            path          Prepend or Append path to MODULEPATH.
+  unuse               path          remove path from MODULEPATH.
+  tablelist                         output list of active modules as a lua table.
+
+Important Environment Variables:
+--------------------------------
+  LMOD_COLORIZE                     If defined to be &quot;YES&quot; then Lmod prints properties and warning in color.
+
+        --------------------------------------------------------------------------------------------------------------------------------
+
+Lmod Web Sites
+
+  Documentation:    http://lmod.readthedocs.org
+  Github:           https://github.com/TACC/Lmod
+  Sourceforge:      https://lmod.sf.net
+  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+        --------------------------------------------------------------------------------------------------------------------------------
 </pre></div>
 </div>
 <dl class="footnote brackets">

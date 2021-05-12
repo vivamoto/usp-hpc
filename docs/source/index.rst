@@ -63,7 +63,7 @@ Cluster **lince**:
    :maxdepth: 2
    :caption: Code Development
 
-   debug_config
+   code_development
    tensorflow_settings
    gpucheck
    linux
