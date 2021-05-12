@@ -195,6 +195,46 @@
 <div class="youtube_wrapper" style="">
 <iframe allowfullscreen="true" src="https://www.youtube.com/embed/U42qlYkzP9k" style="border: 0; height: 345px; width: 560px">
 </iframe></div><p>Here’s a list of some commonly used user commands. See Slurm <a class="reference external" href="https://slurm.schedmd.com/man_index.html">man pages</a> for a complete list of commands or download the  <a class="reference download internal" download="" href="_downloads/ed645709b8b700878a7e0385574b6c60/summary.pdf"><code class="xref download docutils literal notranslate"><span class="pre">command</span> <span class="pre">summary</span> <span class="pre">PDF</span></code></a>. Note that all Slurm commands start with <strong>‘s’</strong>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sbatch &lt;slurm_script&gt;</p></td>
+<td><p>Submit a job script for later execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p>scancel &lt;jobid&gt;</p></td>
+<td><p>Cancel a pending or running job or job step</p></td>
+</tr>
+<tr class="row-even"><td><p>srun</p></td>
+<td><p>Parallel job launcher (Slurm analog of mpirun)</p></td>
+</tr>
+<tr class="row-odd"><td><p>squeue</p></td>
+<td><p>Show all jobs in the queue</p></td>
+</tr>
+<tr class="row-even"><td><p>squeue -u &lt;username&gt;</p></td>
+<td><p>Show jobs in the queue for a specific user</p></td>
+</tr>
+<tr class="row-odd"><td><p>squeue –start</p></td>
+<td><p>Report the expected start time for pending jobs</p></td>
+</tr>
+<tr class="row-even"><td><p>squeue -j &lt;jobid&gt;</p></td>
+<td><p>Show the nodes allocated to a running job</p></td>
+</tr>
+<tr class="row-odd"><td><p>scontrol show config</p></td>
+<td><p>View default parameter settings</p></td>
+</tr>
+<tr class="row-even"><td><p>sinfo</p></td>
+<td><p>Show cluster status</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="job-schedule">
 <h2>Job schedule<a class="headerlink" href="#job-schedule" title="Permalink to this headline">¶</a></h2>

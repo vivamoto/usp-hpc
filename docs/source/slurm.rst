@@ -40,7 +40,7 @@ Here's a list of some commonly used user commands. See Slurm `man pages <https:/
 +-----------------------+----------------------------------------------------+
 | scontrol show config  | View default parameter settings                    |
 +-----------------------+----------------------------------------------------+
-| sinfo                 | Show cluster status                                     |
+| sinfo                 | Show cluster status                                |
 +-----------------------+----------------------------------------------------+
 
 
