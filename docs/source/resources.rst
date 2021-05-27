@@ -32,7 +32,6 @@ The curriculum includes:
 Researcher Academy
 ------------------
 
-*Learn*
 `Researcher Academy <https://researcheracademy.elsevier.com/>`_ provides free access to countless e-learning resources designed to support researchers on every step of their research journey. Browse our extensive module catalogue to uncover a world of knowledge, and earn certificates and rewards as you progress.
 
 RESEARCH PREPARATION
@@ -70,27 +69,6 @@ COMMUNICATING YOUR RESEARCH
 * Ensuring visibility
 * Inclusion and Diversity for Researchers
 
-
-*Career path*
-A career in research can take many twists and turns. Whether you decide to stay in academia or move onto industry, `Researcher Academy’s <https://researcheracademy.elsevier.com/>`_ career resources will help you plan accordingly. Browse the different career sections for sound practical advice to tackle your future.
-
-Career planning
-^^^^^^^^^^^^^^^
-Being an effective researcher requires method and order, and those strong organization skills can prove just as useful when it comes to mapping out your career.
-
-In these career planning modules, we learn about the importance of investigating and considering all options before deciding on your next step. We discover why knowing and understanding yourself can be the key to making good choices. We explore whether a PhD is valued outside academia, and we hear why changing career, or even your field of study, can bring big benefits and opportunities for fresh and novel thinking.
-
-Job search
-^^^^^^^^^^
-You’ve decided to explore career options in industry, but are there any special points to consider when job hunting? The answer is yes, and in these modules, we highlight what they are and how you can prepare for them.
-
-You’ll find out how to take the experiences you’ve gained in the lab and translate them into practical skills any employer can relate to. You’ll also learn how to write a CV that will appeal to a company boss. Finally, we run you through a typical interview process and some of the questions you are likely to be asked.
-
-Career guidance
-^^^^^^^^^^^^^^^
-As a researcher, your career path will be littered with crossroads and side tracks. Faced with all those choices, how do you decide on the right route for you? In our career guidance resources, you will find some helpful words of wisdom from seasoned colleagues.
-
-We examine the ingredients required to make the ideal supervisor who can support and advise you on your journey. We explore how you can maintain a healthy balance between work and family life. We discover why it’s so important to be bold and nurture fresh thinking. And, we run through some of the differences you will encounter if you move from academia to industry.
 
 
 Reference managers

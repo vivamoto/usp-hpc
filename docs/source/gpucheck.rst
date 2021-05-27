@@ -67,91 +67,170 @@ Example of error message::
 Check all servers
 -----------------
 
-A more practical way to check the GPU usage in all servers is using a script. The ``gpu_mon.py`` script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs and creates a bar plot::
+A more practical way to check the GPU usage in all servers is using a script. The ``gpu_mon.py`` script connects to each server and checks the GPU status. Then, it prints a list of servers with idle and falty GPUs, creates a bar plot and sends an e-mail with GPU usage::
 
 	$ python gpu_mon.py
-	===== Idle GPUs ==========
-	lince2-001.hpc.usp.br
-	lince2-009.hpc.usp.br
-	lince2-011.hpc.usp.br
-	lince2-021.hpc.usp.br
-	lince2-022.hpc.usp.br
-	===== Faulty GPUs ==========
-	lince2-008.hpc.usp.br
-	lince2-011.hpc.usp.br
-	
+	Number of servers: 32 
+
+	Two GPUs in use: 13 servers.
+	------------------------------
+	lince2-003
+	lince2-005
+	lince2-008
+	lince2-012
+	lince2-013
+	lince2-014
+	lince2-017
+	lince2-018
+	lince2-020
+	lince2-021
+	lince2-026
+	lince2-027
+	lince2-032
+
+	One GPUs in use: 10 servers.
+	------------------------------
+	lince2-001
+	lince2-002
+	lince2-004
+	lince2-009
+	lince2-011
+	lince2-016
+	lince2-023
+	lince2-024
+	lince2-025
+	lince2-028
+
+	No GPUs in use: 8 servers.
+	------------------------------
+	lince2-006
+	lince2-007
+	lince2-010
+	lince2-019
+	lince2-022
+	lince2-029
+	lince2-030
+	lince2-031
+
+	Faulty GPUs: 0 servers.
+	------------------------------
+
+	Connection failure: 1 servers.
+	------------------------------
+	lince2-015
 .. image:: images/gpu_usage.png
 
 
 gpu_mon script::
 
 	#!/scratch/11568881/miniconda3/bin/python
+	#%%
 	"""
 	This module collects GPU utilization on all servers in lince cluster. This is useful to help
 	identify possible improvements in job speed and free resources for other users.
 	Ideally GPU utilizatin should be high for the most part of the time.
 
 	Process:
-	1. Connect to all servers, collect GPU utilization and save in a log file.
-	2. Read the log file and create a data frame with server and GPUs 0 and 1 utilizations.
-	3. Create a horizontal bar chart.
-	4. Save the plot and data frame.
+	1. Connect to all servers via SSH and collect GPU usage.
+	2. Create a data frame with server and both GPUs usage.
+	3. Create a horizontal bar chart of GPU usage by server.
+	4. Send a summary and plot by e-mail.
 	"""
-	import os, re, datetime, tempfile
+	import os, re, datetime
 	import numpy as np
 	import pandas as pd
 	import matplotlib.pyplot as plt
+	import smtplib, mimetypes
+	from email.message import EmailMessage
 
-	# Connect to each server and collect GPU information.
-	# Result is saved in a log file.
-	def gpustatus(logfile):
-		if os.path.exists(logfile):
-			os.system('rm ' + logfile)
-		for n in range(1, 32):
-			s = ("000" + str(n))[-3:]
-			os.system('ssh lince2-{} "hostname;nvidia-smi|egrep \'Tesla|%|Unable|No running processes found\'" >> {}'.format(s, logfile))
+	def message(msg, servers):
+		"""Format server status message."""
+		text = '\n'
+		text += msg + str(len(servers)) + " servers.\n" 
+		text += "-"*30 + "\n"
+		for server in servers:
+			text += server + '\n'
+		return text
 
-		return
-		
-	# Opens the log file and check the GPU utilization and availability.
-	# Print the list of servers with idle GPU and GPU down.
-	def procfile(logfile):
-		gpu = {}
-		nogpu = []
-		gpudown = []
+	def gpustatus(result_fname, summary_fname):
+		"""Connect to each server and collect GPU information.
+	Result is saved in a log file.
+	"""
+		gpu = {}        # GPU utilization
+		no_gpu = []     # Servers with 0 GPUs in use
+		one_gpu = []    # Servers with 1 GPU in use
+		two_gpu = []    # Servers with 2 GPUs in use
+		gpudown = []    # Servers with faulty GPUs
+		no_route = []   # Servers with connection failure
+		servers = []    # List of servers
 		df = pd.DataFrame(columns = ['Server', 'GPU 0', 'GPU 1'])
-		with open(logfile, 'r') as f:
-			rows = f.readlines()
-			for row in rows:
+
+		for n in range(1, 33):
+			# Connect to each server in the cluster and send commands
+			server_name = 'lince2-' + ("000" + str(n))[-3:]
+			servers.append(server_name)
+			cmd = 'ssh {} "hostname;nvidia-smi"'.format(server_name)
+			pipe = os.popen(cmd,'r')
+
+			print("Processing server:", server_name)
+			for row in pipe.read().split('\n'):
 				#lince2-001.hpc.usp.br
 				server_re = re.search(r'(lince\d-(\d+))\.hpc', row)
 				#|   0  Tesla K20m          Off  | 00000000:05:00.0 Off |                    0 |
 				gpuId_re = re.search(r'\|\s+(\d)\s+Tesla', row)
 				#| N/A   62C    P0   104W / 225W |     78MiB /  4743MiB |     73%      Default |
 				utilization_re = re.search(r'B \|\s+(\d+)%\s+', row)
+				
+				# Read server name
 				if server_re:
 					server = server_re.group(1)
+				# Read GPU error message
 				elif "Unable to determine the device handle for GPU" in row:
 					gpudown.append(server)
-				# GPU ID: 0 or 1
+				# Read GPU ID: 0 or 1
 				elif gpuId_re:
 					gpuId = int(gpuId_re.group(1))      # GPU 0 or 1
-				# GPU utilization
+				# Read GPU utilization
 				elif utilization_re:
 					gpu[gpuId] = int(utilization_re.group(1))
 					if gpuId:
 						df.loc[len(df) + 1] = server, gpu[0], gpu[1]
-				if "No running processes found" in row:
-					nogpu.append(server)
+						# Identify number of GPUs in use
+						if not (gpu[0] or gpu[1]): 
+							no_gpu.append(server)   # 0 GPUs in use
+						elif gpu[0] and gpu[1]:
+							two_gpu.append(server)  # 1 GPU in use
+						else: 
+							one_gpu.append(server)  # 2 GPUs in use
 
-		# Print lists of idle and faulty GPUs
-		print("="*5, "Idle GPUs", "="*10)
-		for item in nogpu:
-			print(item)
-		print("="*5,"Faulty GPUs", "="*10)
-		for item in gpudown:
-			print(item)
+			pipe.close()
 
+		# Connection failure
+		checked_servers = two_gpu +  one_gpu +  no_gpu +  gpudown
+		for server in servers:
+			if not server in checked_servers:
+				no_route.append(server)
+		checked_servers += no_route
+		# Summary of GPU usage 
+		n =  len(checked_servers)
+		summary = "Number of servers: {} \n".format(str(n))
+		summary += message("Two GPUs in use: ", two_gpu)
+		summary += message("One GPUs in use: ", one_gpu)
+		summary += message("No GPUs in use: ", no_gpu)
+		summary += message("Faulty GPUs: ", gpudown)
+		summary += message("Connection failure: ", no_route)
+		
+		print(summary)
+		# Save data frame and summary
+		df.to_csv(result_fname)
+		with open(summary_fname, 'w') as f:
+			f.write(summary)
+
+		return 
+
+	def create_plot(result, plot):
+		"""Create plot of GPU usage per server."""
+		df = pd.read_csv(result)
 		# Create plot
 		x = np.arange(len(df['Server']))  # the label locations
 		width = 0.35  # the width of the bars
@@ -177,23 +256,66 @@ gpu_mon script::
 
 		fig.tight_layout()
 
-		# Save plot and data frame
-		dt = now.strftime("%Y%m%d_%H%M")
-		plt.savefig('plot/gpu_status_{}.png'.format(dt),
-				dpi=300, bbox_inches='tight')
-		df.to_csv('result/gpu_status_{}.csv'.format(dt), index=False, decimal=',', sep='\t')
-
+		# Save and show plot
+		plt.savefig(plot, dpi=300, bbox_inches='tight')
 		plt.show()    
 		
 		return 
-	# Execute GPU checks
-	home = os.environ['HOME']               # get home directory
-	os.chdir('{}/project/'.format(home))    # change to project dir
-	logfile = 'log/hwmon.log'               # log file name
-	for path in ['log', 'plot', 'result']:
-		if not os.path.exists(path):
-			os.mkdir(path, 0755)
-	gpustatus(logfile = logfile)
-	procfile(logfile = logfile)
+
+	def send_email(receiver, message, plot_fname):
+	   """Send email with summary of GPU usage and plot."""
+	   # Create message and set text content
+	   sender = 'no-reply@lince2.hpc.usp.br'
+	   msg = EmailMessage()
+	   msg['Subject'] = 'Lince: GPUs Status'
+	   msg['From'] = sender
+	   msg['To'] = receiver
+
+	   # Message content
+	   body = """*** Automatic e-mail, do not reply. ***
+	   
+	Status of lince servers.
+
+	See attached plot.
+	  
+	""" 
+	   body += message
+	   msg.set_content(body)
+
+	   # Attach plot
+	   with open(plot_fname, 'rb') as fp:
+		  file_data = fp.read()
+		  maintype, _, subtype = (mimetypes.guess_type(plot_fname)[0] or 'application/octet-stream').partition("/")
+		  msg.add_attachment(file_data, maintype=maintype, subtype=subtype, filename=plot_fname)
+
+	   # Send e-mail
+	   with smtplib.SMTP('localhost') as server:
+		  server.sendmail(sender, receiver, msg.as_string())
+		  print("Successfully sent email")
 
 
+	if __name__ == '__main__':
+		now = datetime.datetime.now()
+		dt = now.strftime("%Y%m%d_%H%M")
+		plot_fname = 'plot/gpu_status_{}.png'.format(dt)
+		result_fname = 'gpu.csv'
+		summary_fname = 'summary.txt'
+
+		# 1. Execute GPU checks
+		gpustatus(result_fname, summary_fname)
+
+		# 2. Create plot
+		create_plot(result_fname, plot_fname)
+
+		# 3. Send result by e-mail
+		receiver = 'your@email.com'
+		with open(summary_fname, 'r') as f:
+			rows = f.readlines()
+			msg = ''
+			for row in rows:
+				msg += row
+		send_email(receiver, msg, plot_fname)
+
+		# 4. Delete files
+		for fname in [plot_fname, result_fname, summary_fname]:
+			os.unlink(fname)
